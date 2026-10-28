@@ -134,14 +134,14 @@
       </section>
     </div>
 
-    <!-- 인증샷: 휴대폰 카메라가 바로 열리도록 capture 사용 -->
+    <!-- 인증샷: capture 없이 열어 휴대폰이 "사진 찍기 / 사진 보관함" 선택 창을 띄우게 한다 -->
     <section class="photo-card" id="photo-card" data-state="empty" aria-live="polite">
       <button class="photo-card__main" type="button" id="photo-pick">
         <span class="photo-card__icon" id="photo-icon"><span class="icon" aria-hidden="true">photo_camera</span></span>
         <span class="photo-card__body">
           <span class="photo-card__title"><span id="photo-title">지금 사진 찍기</span> <span class="pill pill--solid" id="photo-pill">+1점</span></span>
           <span class="photo-card__desc" id="photo-desc">증거는 남겨야죠</span>
-          <span class="photo-card__hint" id="photo-hint">지금 찍은 사진을 올려 주세요</span>
+          <span class="photo-card__hint" id="photo-hint">사진을 찍거나 앨범에서 골라 주세요</span>
         </span>
       </button>
       <span class="icon photo-card__chevron" id="photo-chevron" aria-hidden="true">chevron_right</span>
@@ -153,7 +153,7 @@
           <div class="gauge__fill" id="photo-progress-fill"></div>
         </div>
       </div>
-      <input class="sr-only" type="file" accept="image/*" capture="environment" id="photo-input" tabindex="-1" aria-hidden="true">
+      <input class="sr-only" type="file" accept="image/*" id="photo-input" tabindex="-1" aria-hidden="true">
     </section>
 
     <!-- 오늘 완료한 운동 -->

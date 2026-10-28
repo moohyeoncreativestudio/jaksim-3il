@@ -284,7 +284,7 @@
     $('photo-desc').textContent = '증거는 남겨야죠';
     pill.className = 'pill pill--solid';
     pill.textContent = '+1점';
-    hint.textContent = '지금 찍은 사진을 올려 주세요';
+    hint.textContent = '사진을 찍거나 앨범에서 골라 주세요';
   }
 
   // 긴 변 1280px, JPEG 품질 0.8로 줄인다 (2MB를 넘으면 품질을 조금 더 낮춘다)
