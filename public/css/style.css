@@ -74,6 +74,7 @@
   --glow: 0 0 24px rgb(var(--primary-container-rgb) / 0.35), 0 4px 12px rgb(0 0 0 / 0.5);
   --glow-pressed: 0 0 12px rgb(var(--primary-container-rgb) / 0.5);
   --shadow-overlay: 0 12px 32px -4px rgb(0 0 0 / 0.7);
+  --glow-selected: 0 0 16px rgb(var(--primary-container-rgb) / 0.25), inset 0 0 8px rgb(var(--primary-container-rgb) / 0.1);
 }
 
 /* ---------- 2. 타이포그래피 (DESIGN.md typography) ---------- */
@@ -333,7 +334,7 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
 .card--selected {
   background: var(--surface-container-high);
   border: 2px solid var(--primary-container);
-  box-shadow: 0 0 12px rgb(var(--primary-container-rgb) / 0.25);
+  box-shadow: var(--glow-selected);
 }
 .card--glow { box-shadow: 0 0 28px rgb(var(--primary-container-rgb) / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.08); }
 
@@ -368,6 +369,11 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
+/* 큰 세그먼트 탭 (유산소 / 근력) */
+.seg--lg { background: var(--surface-container-low); border-color: rgb(var(--outline-variant-rgb) / 0.3); }
+.seg--lg .seg__btn { padding: 12px 8px; background: var(--surface-container); font: 500 18px/24px var(--font-display); letter-spacing: 0; }
+.seg--lg .seg__btn[aria-selected='true'] { background: var(--primary-container); color: #000; font-weight: 700; }
+
 /* ---------- 9. 칩 ---------- */
 .chip-row { display: flex; align-items: center; gap: var(--space-xs); overflow-x: auto; padding: 4px 0; scrollbar-width: none; }
 .chip-row::-webkit-scrollbar { display: none; }
@@ -393,8 +399,17 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
   border: 2px solid var(--primary-container);
   color: var(--primary);
   font-weight: 700;
-  box-shadow: 0 0 12px rgb(var(--primary-container-rgb) / 0.25);
+  box-shadow: var(--glow-selected);
 }
+/* "직접 입력" 칩 */
+.chip--ghost {
+  gap: 4px;
+  padding-inline: 14px;
+  background: rgb(var(--surface-variant-rgb) / 0.4);
+  border-color: rgb(var(--outline-rgb) / 0.3);
+  color: var(--on-surface);
+}
+.chip--ghost:hover { border-color: var(--primary); }
 .chip.is-selected .icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
 /* 작은 알약 배지 (+1점, 추천, 4~20자 안내 등) */
@@ -577,6 +592,11 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
 .rule--total { border-color: rgb(var(--primary-container-rgb) / 0.4); }
 .rule--total .rule__name { color: var(--primary); }
 
+.modal__message { color: var(--on-surface-variant); font: 400 15px/22px var(--font-body); }
+.modal__actions { display: flex; gap: var(--space-sm); margin-top: var(--space-lg); }
+.modal__actions .btn { min-height: 3rem; }
+.btn--danger { background: var(--error-container); color: #ffdad6; }
+
 /* ---------- 14. 토스트 ---------- */
 .toast {
   position: fixed;
@@ -737,3 +757,235 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
 .auth-switch button:hover { text-decoration: underline; }
 .auth-footer { position: relative; z-index: 10; width: 100%; padding: var(--space-sm) var(--margin-mobile) var(--space-xl); text-align: center; }
 .auth-footer p { margin-top: 12px; color: var(--outline); }
+
+/* ---------- 16. 운동 추가 화면 ---------- */
+.shell--app .page--add {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-top: calc(var(--header-h) + var(--space-sm));
+  padding-bottom: 13rem;
+}
+.add-panel { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+/* 오늘 운동 점수 게이지 카드 */
+.score-gauge { display: flex; flex-direction: column; gap: var(--space-sm); }
+.score-gauge__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px var(--space-sm); }
+.score-gauge__title { display: flex; align-items: center; gap: var(--space-xs); font: 600 14px/18px var(--font-display); letter-spacing: 0.02em; white-space: nowrap; }
+.score-gauge__title .icon { font-size: 20px; color: var(--primary); }
+.score-gauge__num { color: var(--primary); font: 700 18px/24px var(--font-display); }
+.score-chip {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgb(var(--primary-container-rgb) / 0.15);
+  border: 1px solid rgb(115 255 123 / 0.2);
+  color: var(--primary);
+  font: 700 12px/16px var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+/* 섹션 제목 줄: 왼쪽 라벨, 오른쪽 보조 문구 */
+.section { display: flex; flex-direction: column; gap: var(--space-xs); }
+.section--sm-gap { gap: var(--space-sm); }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); padding: 0 4px; }
+.section-head__label { color: var(--on-surface-variant); font: 600 12px/16px var(--font-display); letter-spacing: 0.05em; text-transform: uppercase; }
+.section-head__aside { color: var(--on-surface-variant); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; text-align: right; }
+.section-head__aside--accent { color: var(--primary); }
+.section-head__aside--muted { color: var(--outline); }
+.section-head__title { font: 700 18px/24px var(--font-display); }
+
+/* 숫자 조절 카드 (운동 시간 / 세트 수) */
+.counter { display: flex; flex-direction: column; align-items: center; gap: var(--space-md); text-align: center; }
+.counter__label { color: var(--on-surface-variant); font: 600 12px/16px var(--font-display); letter-spacing: 0.05em; }
+.counter__row { display: flex; align-items: center; justify-content: center; gap: var(--space-md); width: 100%; margin: 4px 0; }
+.counter__value { display: flex; align-items: baseline; justify-content: center; gap: 4px; min-width: 110px; }
+.counter__num { color: #fff; font: 700 42px/46px var(--font-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+.counter__unit { color: var(--primary); font: 700 26px/32px var(--font-display); letter-spacing: -0.02em; }
+.counter__steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-sm); width: 100%; max-width: 24rem; padding-top: 4px; }
+.step-btn {
+  padding: 10px 4px;
+  border-radius: var(--radius-full);
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+  color: var(--on-surface);
+  font: 700 12px/16px var(--font-display);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  transition: background-color 0.15s, transform 0.15s;
+}
+.step-btn:hover { background: var(--surface-variant); }
+.step-btn:active { transform: scale(0.95); }
+.round-btn {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+  color: var(--on-surface);
+  transition: background-color 0.15s, transform 0.15s;
+}
+.round-btn:hover { background: var(--surface-variant); }
+.round-btn:active { transform: scale(0.9); }
+
+/* 강도 선택 카드 */
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md);
+  text-align: left;
+  background: var(--surface-container-low);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.3);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.option:hover { border-color: rgb(var(--outline-rgb) / 0.5); }
+.option:active { transform: scale(0.99); }
+.option__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.option__title { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-sm); color: var(--on-surface); font: 600 18px/24px var(--font-display); }
+.option__desc { color: var(--on-surface-variant); font: 400 13px/18px var(--font-body); }
+.option__radio {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--outline-variant);
+}
+.option__radio .icon { display: none; font-size: 16px; font-weight: 700; }
+.option[aria-checked='true'] {
+  background: var(--surface-container-high);
+  border: 2px solid var(--primary-container);
+  box-shadow: var(--glow-selected);
+}
+.option[aria-checked='true'] .option__title { color: #fff; font-weight: 700; }
+.option[aria-checked='true'] .option__radio { border: 0; background: var(--primary-container); color: #000; box-shadow: 0 0 8px var(--primary-container); }
+.option[aria-checked='true'] .option__radio .icon { display: inline-block; }
+
+/* 메모 입력 카드 */
+.memo-card { padding: var(--space-md); background: var(--surface-container-low); border: 1px solid rgb(var(--outline-variant-rgb) / 0.3); border-radius: var(--radius-lg); transition: border-color 0.15s; }
+.memo-card:focus-within { border-color: var(--primary); }
+.memo-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--outline);
+  border-radius: 0; /* Stitch 결과 화면처럼 각진 입력칸 */
+  color: var(--on-surface);
+  font: 400 15px/22px var(--font-body);
+}
+.memo-input::placeholder { color: rgb(187 203 181 / 0.6); }
+.memo-input:focus { outline: none; border-color: var(--primary); }
+
+/* 인증샷 카드 */
+.photo-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md);
+  text-align: left;
+  background: rgb(26 28 32 / 0.6);
+  border: 2px dashed var(--outline-variant);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.photo-card:hover { border-color: rgb(var(--primary-container-rgb) / 0.6); }
+.photo-card:active { transform: scale(0.99); }
+.photo-card__main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.photo-card__icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-high);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+  color: var(--primary);
+}
+.photo-card__title { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font: 700 18px/24px var(--font-display); }
+.photo-card__desc { color: var(--on-surface-variant); font: 400 13px/18px var(--font-body); }
+.photo-card > .icon { color: var(--outline); font-size: 22px; }
+
+/* 오늘 완료한 운동 목록 */
+.log-list { display: flex; flex-direction: column; gap: var(--space-xs); }
+.log-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.3);
+  border-radius: var(--radius-lg);
+}
+.log-item.is-editing { background: var(--surface-container-high); border: 2px solid var(--primary-container); box-shadow: var(--glow-selected); }
+.log-item__main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.log-item__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-highest);
+  color: var(--on-surface-variant);
+}
+.log-item__icon .icon { font-size: 20px; }
+.log-item__icon--cardio { color: var(--primary); }
+.log-item__text { display: flex; flex-direction: column; min-width: 0; }
+.log-item__title { display: flex; align-items: center; flex-wrap: wrap; gap: 2px var(--space-sm); font: 700 14px/18px var(--font-display); letter-spacing: 0.02em; }
+/* 띄어쓰기 없는 긴 종목명(최대 20자)도 칸 안에서 줄바꿈 */
+.log-item__title > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.log-item__time { color: var(--on-surface-variant); font: 400 13px/18px var(--font-body); }
+.score-tag { padding: 2px 6px; border-radius: 0.25rem; background: var(--surface-variant); color: var(--primary); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; white-space: nowrap; }
+.log-item__actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.log-item__btn {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--on-surface-variant);
+  transition: color 0.15s, transform 0.15s;
+}
+.log-item__btn .icon { font-size: 18px; }
+.log-item__btn:hover { color: var(--on-surface); }
+.log-item__btn--delete:hover { color: var(--error); }
+.log-item__btn:active { transform: scale(0.9); }
+.log-empty { padding: var(--space-md); color: var(--on-surface-variant); font: 400 13px/18px var(--font-body); text-align: center; }
+
+/* 하단 고정 저장 영역 */
+.action-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--tabbar-h);
+  z-index: 40;
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: var(--space-md) var(--margin-mobile) 12px;
+  /* Stitch의 위로 갈수록 투명해지는 그라데이션. 요약 줄 뒤는 불투명하게 해 아래 내용이 비치지 않게 한다 */
+  padding-top: var(--space-xl);
+  background: linear-gradient(to top, var(--surface) calc(100% - var(--space-xl)), rgb(var(--surface-rgb) / 0.95) calc(100% - var(--space-md)), transparent);
+}
+.action-bar__summary { display: flex; align-items: center; justify-content: space-between; gap: 2px var(--space-sm); margin-bottom: 10px; padding: 0 var(--space-sm); }
+.action-bar__label { flex-shrink: 0; color: var(--on-surface-variant); font: 600 12px/16px var(--font-display); letter-spacing: 0.04em; }
+.action-bar__value { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; column-gap: 4px; font: 700 14px/18px var(--font-display); letter-spacing: 0.02em; text-align: right; }
+.action-bar__value > span { white-space: nowrap; } /* "오늘 17 / 20점"이 중간에서 줄바꿈되지 않게 */
+.action-bar__gain { color: var(--primary); font: 700 18px/24px var(--font-display); }
+.action-bar__arrow { color: var(--on-surface-variant); }
+.action-bar .btn { font: 700 18px/24px var(--font-display); color: #000; }

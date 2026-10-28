@@ -13,9 +13,163 @@
 </head>
 <body data-auth="pending" data-tab="add">
 <div class="shell shell--app">
-  <main class="page" id="page"></main>
+  <main class="page page--add" id="page">
+    <!-- 오늘 운동 점수 게이지 -->
+    <section class="card score-gauge" aria-live="polite">
+      <div class="score-gauge__head">
+        <span class="score-gauge__title">
+          <span class="icon is-filled" aria-hidden="true">bolt</span>
+          <span>오늘 운동 점수 <span class="score-gauge__num" id="today-score">0</span> / 20점</span>
+        </span>
+        <span class="score-chip" id="today-remaining">+20점 남음</span>
+      </div>
+      <div class="gauge" role="progressbar" aria-label="오늘 운동 점수" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="today-gauge">
+        <div class="gauge__fill" id="today-gauge-fill"></div>
+      </div>
+    </section>
+
+    <!-- 유산소 / 근력 -->
+    <div class="seg seg--lg" role="tablist" aria-label="운동 종류">
+      <button class="seg__btn" type="button" role="tab" id="tab-cardio" aria-controls="panel-cardio" aria-selected="true">유산소</button>
+      <button class="seg__btn" type="button" role="tab" id="tab-strength" aria-controls="panel-strength" aria-selected="false">근력</button>
+    </div>
+
+    <!-- 유산소 -->
+    <div class="add-panel" id="panel-cardio" role="tabpanel" aria-labelledby="tab-cardio">
+      <section class="section">
+        <div class="section-head">
+          <span class="section-head__label">종목 선택</span>
+          <span class="section-head__aside section-head__aside--accent">유산소 맞춤</span>
+        </div>
+        <div class="chip-row" id="activity-chips"></div>
+        <div class="field" id="custom-field" hidden>
+          <div class="field__box">
+            <input class="input" id="custom-activity" type="text" maxlength="20" placeholder="종목명을 입력하세요 (최대 20자)" aria-label="직접 입력 종목명">
+          </div>
+          <p class="field__error" id="custom-error" hidden></p>
+        </div>
+      </section>
+
+      <section class="card card--lg counter">
+        <span class="counter__label">운동 시간</span>
+        <div class="counter__value">
+          <span class="counter__num" id="minutes-val">30</span>
+          <span class="counter__unit">분</span>
+        </div>
+        <div class="counter__steps">
+          <button class="step-btn" type="button" data-minutes="-10">-10분</button>
+          <button class="step-btn" type="button" data-minutes="-1">-1분</button>
+          <button class="step-btn" type="button" data-minutes="1">+1분</button>
+          <button class="step-btn" type="button" data-minutes="10">+10분</button>
+        </div>
+      </section>
+
+      <section class="section section--sm-gap">
+        <div class="section-head">
+          <span class="section-head__label">운동 강도 선택</span>
+          <span class="section-head__aside">점수 산출</span>
+        </div>
+        <div class="section section--sm-gap" role="radiogroup" aria-label="운동 강도" id="intensity-options">
+          <button class="option" type="button" role="radio" aria-checked="false" data-intensity="1">
+            <span class="option__text">
+              <span class="option__title">가볍게 · 강도 1</span>
+              <span class="option__desc">편하게 대화할 수 있었다</span>
+            </span>
+            <span class="option__radio"><span class="icon" aria-hidden="true">check</span></span>
+          </button>
+          <button class="option" type="button" role="radio" aria-checked="true" data-intensity="2">
+            <span class="option__text">
+              <span class="option__title">보통 · 강도 2 <span class="pill pill--solid">추천</span></span>
+              <span class="option__desc">짧은 문장 정도만 말할 수 있었다</span>
+            </span>
+            <span class="option__radio"><span class="icon" aria-hidden="true">check</span></span>
+          </button>
+          <button class="option" type="button" role="radio" aria-checked="false" data-intensity="3">
+            <span class="option__text">
+              <span class="option__title">힘들게 · 강도 3</span>
+              <span class="option__desc">말하기 어려웠다</span>
+            </span>
+            <span class="option__radio"><span class="icon" aria-hidden="true">check</span></span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- 근력 -->
+    <div class="add-panel" id="panel-strength" role="tabpanel" aria-labelledby="tab-strength" hidden>
+      <section class="section">
+        <div class="section-head">
+          <span class="section-head__label">운동 부위 선택</span>
+          <span class="section-head__aside">다중 선택 가능</span>
+        </div>
+        <div class="chip-row" id="part-chips"></div>
+      </section>
+
+      <section class="card card--lg counter">
+        <span class="counter__label">운동 세트 수</span>
+        <div class="counter__row">
+          <button class="round-btn" type="button" data-sets="-1" aria-label="1세트 빼기"><span class="icon" aria-hidden="true">remove</span></button>
+          <div class="counter__value">
+            <span class="counter__num" id="sets-val">5</span>
+            <span class="counter__unit">세트</span>
+          </div>
+          <button class="round-btn" type="button" data-sets="1" aria-label="1세트 더하기"><span class="icon" aria-hidden="true">add</span></button>
+        </div>
+        <div class="counter__steps">
+          <button class="step-btn" type="button" data-sets="-1">-1</button>
+          <button class="step-btn" type="button" data-sets="1">+1</button>
+          <button class="step-btn" type="button" data-sets="3">+3</button>
+          <button class="step-btn" type="button" data-sets="5">+5</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <label class="section-head__label" for="memo">상세 루틴 메모 (선택)</label>
+          <span class="section-head__aside section-head__aside--muted">최대 100자</span>
+        </div>
+        <div class="memo-card">
+          <input class="memo-input" id="memo" type="text" maxlength="100" placeholder="예: 스쿼트 3세트, 레그프레스 2세트">
+        </div>
+      </section>
+    </div>
+
+    <!-- 인증샷 (5단계에서 구현) -->
+    <button class="photo-card" type="button" id="photo-card">
+      <span class="photo-card__main">
+        <span class="photo-card__icon"><span class="icon" aria-hidden="true">photo_camera</span></span>
+        <span>
+          <span class="photo-card__title">지금 사진 찍기 <span class="pill pill--solid">+1점</span></span>
+          <span class="photo-card__desc">증거는 남겨야죠</span>
+        </span>
+      </span>
+      <span class="icon" aria-hidden="true">chevron_right</span>
+    </button>
+
+    <!-- 오늘 완료한 운동 -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-head__title" id="log-title">오늘 완료한 운동 (0개)</h2>
+        <span class="section-head__aside" id="log-total">누적 +0점 반영됨</span>
+      </div>
+      <div class="log-list" id="log-list"></div>
+    </section>
+  </main>
+
+  <!-- 하단 고정 저장 영역 -->
+  <div class="action-bar">
+    <div class="action-bar__summary" aria-live="polite">
+      <span class="action-bar__label">예상 획득 점수</span>
+      <span class="action-bar__value" id="preview"></span>
+    </div>
+    <button class="btn btn--primary" type="button" id="save-btn">
+      <span id="save-label">저장하기</span>
+      <span class="icon" aria-hidden="true">arrow_forward</span>
+    </button>
+  </div>
 </div>
 <script src="/js/ui.js"></script>
 <script src="/js/shell.js"></script>
+<script src="/js/add.js"></script>
 </body>
 </html>

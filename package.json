@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "node --env-file-if-exists=.env dev-server.js",
     "start": "node --env-file-if-exists=.env dev-server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "test:db": "node --env-file=.env --test"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
