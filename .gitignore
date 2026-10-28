@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.vercel/
+.DS_Store
+
+# 이전 자료 (구현에 사용하지 않음)
+_이전버전_팀경쟁/
+stitch_workout_rank_onboarding*/
+stitch_workout_self*/
+*.zip

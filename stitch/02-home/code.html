@@ -1,0 +1,424 @@
+<!DOCTYPE html><html class="dark" lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>작심삼일 - 데일리 피트니스 대시보드</title>
+<!-- Material Symbols Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Brand Typography Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS Play CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration with Design System Tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#680017",
+            "on-surface-variant": "#bbcbb5",
+            "surface-container-low": "#1a1c20",
+            "secondary-fixed-dim": "#00e478",
+            "on-primary": "#00390b",
+            "inverse-on-surface": "#2f3035",
+            "surface-container": "#1e2024",
+            "on-primary-fixed": "#002204",
+            "primary-fixed": "#6fff79",
+            "surface": "#111317",
+            "inverse-surface": "#e2e2e8",
+            "background": "#111317",
+            "secondary-fixed": "#60ff98",
+            "on-error-container": "#ffdad6",
+            "surface-container-lowest": "#0c0e12",
+            "primary-fixed-dim": "#21e54e",
+            "outline": "#859581",
+            "on-secondary-fixed-variant": "#005227",
+            "on-background": "#e2e2e8",
+            "on-secondary-fixed": "#00210c",
+            "inverse-primary": "#006e1e",
+            "surface-bright": "#37393e",
+            "primary-container": "#22e54e",
+            "on-primary-container": "#006119",
+            "on-tertiary-fixed-variant": "#920024",
+            "on-secondary-container": "#007239",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#ffb3b4",
+            "tertiary": "#ffdada",
+            "on-tertiary-fixed": "#40000a",
+            "on-tertiary-container": "#a8002b",
+            "tertiary-fixed": "#ffdad9",
+            "outline-variant": "#3c4b39",
+            "on-primary-fixed-variant": "#005314",
+            "surface-variant": "#333539",
+            "on-surface": "#e2e2e8",
+            "error-container": "#93000a",
+            "primary": "#73ff7b",
+            "tertiary-container": "#ffb3b4",
+            "surface-tint": "#21e54e",
+            "secondary": "#f5fff3"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-2xl": "3rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "label-md": ["Space Grotesk"],
+            "display-hero": ["Space Grotesk"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Space Grotesk"],
+            "label-lg": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"],
+            "headline-sm": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "display-hero-mobile": ["Space Grotesk"],
+            "metric-md": ["Space Grotesk"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "metric-huge": ["Space Grotesk"],
+            "headline-lg-mobile": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "body-lg": ["17px", { "lineHeight": "26px", "fontWeight": "500" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-hero-mobile": ["42px", { "lineHeight": "46px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "metric-md": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "metric-huge": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .neon-card-glow {
+      box-shadow: 0 0 28px rgba(34, 229, 78, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .neon-btn-glow {
+      box-shadow: 0 0 24px rgba(34, 229, 78, 0.35), 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .neon-pulse-ring {
+      animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 229, 78, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 0 5px rgba(34, 229, 78, 0.15);
+      }
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary min-h-screen">
+<!-- Mobile Screen Constraint Wrapper (Max 480px, Centered) -->
+<div class="relative w-full max-w-[480px] mx-auto min-h-screen bg-surface flex flex-col pb-36 border-x border-outline-variant/30">
+<!-- Top App Bar Component from Shared Components JSON -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-margin-mobile h-14 max-w-[480px] mx-auto bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<!-- Leading Brand Unit -->
+<div class="flex items-center gap-1.5 active:scale-95 transition-transform duration-150 cursor-pointer">
+<span class="material-symbols-outlined text-primary-container" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">작심삼일</span>
+</div>
+<!-- Trailing Action Profile & Settings -->
+<div class="flex items-center gap-2">
+<button aria-label="Settings" class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-150 p-1 rounded-full" type="button">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="relative group">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary-fixed-dim font-label-md text-label-md cursor-pointer hover:border-primary transition-colors">
+            MK
+          </div>
+<!-- Profile / Logout Quick Hint Overlay -->
+<div class="absolute right-0 top-10 hidden group-hover:flex flex-col bg-surface-container-highest border border-outline-variant rounded-DEFAULT p-2 shadow-2xl z-50 min-w-[110px]">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1">musclekim</span>
+<div class="h-px bg-outline-variant my-1"></div>
+<button class="font-label-sm text-label-sm text-error hover:bg-error-container/20 rounded px-2 py-1 text-left flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="logout">logout</span> 로그아웃
+            </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Container with Top Bar Spacing -->
+<main class="flex-1 px-margin-mobile pt-16 flex flex-col gap-space-lg">
+<!-- Dynamic Greeting & Date Sub-Header -->
+<section class="flex flex-col gap-0.5 pt-2">
+<span class="font-label-md text-label-md text-on-surface-variant tracking-wider">10월 20일 화요일</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight flex items-center gap-1.5">
+          musclekim 님, 오늘도 작심! 
+          <span class="inline-block animate-pulse">⚡</span>
+</h1>
+</section>
+<!-- 이번 달 점수 카드 (Impact Hero Card with Kinetic Volt Glow) -->
+<section class="relative bg-surface-container-low border border-outline-variant/60 rounded-lg p-5 neon-card-glow overflow-hidden">
+<!-- Ambient Neon Glow Blob -->
+<div class="absolute -right-10 -bottom-10 w-44 h-44 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-3">
+<!-- Card Header & Badge -->
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="stars">stars</span>
+              10월 누적 점수
+            </span>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container-high text-primary border border-primary/30 tracking-wider">
+              TOP 5% 페이스
+            </span>
+</div>
+<!-- Hero Number Metric -->
+<div class="flex items-baseline gap-1 my-0.5">
+<span class="font-metric-huge text-metric-huge text-on-surface tracking-tighter font-extrabold">246.3</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">점</span>
+</div>
+<!-- Previous Month Comparative Chip -->
+<div class="flex flex-wrap items-center gap-2 p-2.5 rounded-DEFAULT bg-surface-container-lowest/80 border border-outline-variant/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">9월 1~20일 221.5점</span>
+<span class="text-outline-variant">→</span>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-fixed border border-primary-container/40">
+<span class="font-label-sm text-label-sm font-bold flex items-center">
+                ▲ 24.8점 · 11.2% 상승
+              </span>
+</div>
+</div>
+<!-- Witty Habit Encouragement -->
+<div class="flex items-center justify-between pt-1 border-t border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface font-semibold flex items-center gap-1">
+              지난달의 나, 이기는 중 🔥
+            </p>
+<span class="font-label-sm text-label-sm text-primary/80 flex items-center gap-0.5 cursor-pointer hover:underline">
+              상세 분석 <span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</span>
+</div>
+</div>
+</section>
+<!-- 스트릭 배지 & 이번 달 요약 그리드 -->
+<section class="flex flex-col gap-space-sm">
+<!-- 작심삼일 돌파 스트릭 배지 -->
+<div class="flex items-center justify-between px-4 py-3 rounded-DEFAULT bg-surface-container border border-primary/50 relative overflow-hidden">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 text-primary flex items-center justify-center neon-pulse-ring">
+<span class="material-symbols-outlined text-[20px]" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface font-bold">
+                작심삼일 돌파! 7일째
+              </p>
+<p class="font-label-sm text-label-sm text-primary">
+                +2점 연속 보너스 유지 중
+              </p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<!-- 3-Slot Grid Habit Summary Bento -->
+<div class="grid grid-cols-3 gap-2">
+<!-- Slot 1: 작심 18일 -->
+<div class="flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container border border-outline-variant/40 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">목표 달성</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">작심 18일</span>
+<span class="font-label-sm text-label-sm text-primary/70 mt-1">90% 완료</span>
+</div>
+<!-- Slot 2: 인증샷 12일 -->
+<div class="flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container border border-outline-variant/40 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">피드 인증</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold mt-0.5">인증샷 12일</span>
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim mt-1">+12pt 획득</span>
+</div>
+<!-- Slot 3: 🔥 7일 연속 -->
+<div class="flex flex-col items-center justify-center p-3 rounded-DEFAULT bg-surface-container-high border border-primary/40 text-center relative overflow-hidden">
+<span class="font-label-sm text-label-sm text-primary font-bold">현재 스트릭</span>
+<span class="font-headline-sm text-headline-sm text-primary font-extrabold mt-0.5">🔥 7일 연속</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">기록 경신 중</span>
+</div>
+</div>
+</section>
+<!-- 이번 주 미니 달력 (가로 7일 캘린더) -->
+<section class="flex flex-col gap-2.5 p-4 rounded-lg bg-surface-container border border-outline-variant/40">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="calendar_month">calendar_month</span>
+            이번 주 루틴 흐름
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10.19 ~ 10.25</span>
+</div>
+<!-- 7-Day Micro Strip -->
+<div class="grid grid-cols-7 gap-1.5 pt-1">
+<!-- 월 (완료) -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">월</span>
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">완료</span>
+</div>
+<!-- 화 (오늘: 액티브) -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-sm text-label-sm text-primary font-bold">화</span>
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center justify-center font-bold ring-2 ring-white ring-offset-2 ring-offset-surface shadow-[0_0_12px_rgba(34,229,78,0.6)]">
+              20
+            </div>
+<span class="font-label-sm text-label-sm font-bold text-white bg-primary-container/40 px-1 rounded">오늘</span>
+</div>
+<!-- 수 (미완/예정) -->
+<div class="flex flex-col items-center gap-1.5 opacity-40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">수</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center">
+              21
+            </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">-</span>
+</div>
+<!-- 목 -->
+<div class="flex flex-col items-center gap-1.5 opacity-40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">목</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center">
+              22
+            </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">-</span>
+</div>
+<!-- 금 -->
+<div class="flex flex-col items-center gap-1.5 opacity-40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">금</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center">
+              23
+            </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">-</span>
+</div>
+<!-- 토 -->
+<div class="flex flex-col items-center gap-1.5 opacity-40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">토</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center">
+              24
+            </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">-</span>
+</div>
+<!-- 일 -->
+<div class="flex flex-col items-center gap-1.5 opacity-40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">일</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md flex items-center justify-center">
+              25
+            </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">-</span>
+</div>
+</div>
+</section>
+<!-- 오늘 점수 세부 게이지 카드 -->
+<section class="flex flex-col gap-4 p-5 rounded-lg bg-surface-container border border-outline-variant/40">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-3">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">오늘 점수</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">데일리 목표치 도달 현황</p>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">17.9</span>
+<span class="font-body-md text-body-md text-on-surface-variant"> / 23점</span>
+</div>
+</div>
+<!-- Gauge 1: 운동 (14.9 / 20) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="fitness_center">fitness_center</span>
+              운동 기록
+            </span>
+<span class="text-primary font-bold">14.9 <span class="text-on-surface-variant font-normal">/ 20 점</span></span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(34,229,78,0.5)]" style="width: 74.5%;"></div>
+</div>
+</div>
+<!-- Gauge 2: 연속 보너스 (+2 / 2) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed-dim" data-icon="bolt">bolt</span>
+              연속 보너스
+            </span>
+<span class="text-secondary-fixed-dim font-bold">+2 <span class="text-on-surface-variant font-normal">/ 2 점 (완료)</span></span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim rounded-full transition-all duration-500" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Gauge 3: 인증샷 (+1 / 1) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary-fixed" data-icon="photo_camera">photo_camera</span>
+              인증샷 업로드
+            </span>
+<span class="text-secondary-fixed font-bold">+1 <span class="text-on-surface-variant font-normal">/ 1 점 (완료)</span></span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed rounded-full transition-all duration-500" style="width: 100%;"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- 하단 고정 영역: Floating CTA Button & BottomNavBar Shell -->
+<div class="fixed bottom-0 left-0 right-0 z-40 max-w-[480px] mx-auto pointer-events-none">
+<!-- Primary Full-Width CTA Button -->
+<div class="px-margin-mobile pb-3 pointer-events-auto">
+<button class="w-full h-14 bg-primary-container text-surface-container-lowest font-headline-sm text-headline-sm font-extrabold rounded-full flex items-center justify-center gap-2 neon-btn-glow active:scale-[0.98] transition-transform duration-150" type="button">
+<span class="material-symbols-outlined text-[24px]" data-icon="add" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="">운동 추가하기</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar from Shared Components JSON -->
+<!-- Semantic Mapping: Current page is primary dashboard '오늘운동' (Active) -->
+<nav class="pointer-events-auto h-16 px-gutter-mobile flex items-center justify-around bg-surface-container dark:bg-surface-container shadow-lg dark:shadow-none border-t border-outline-variant dark:border-outline-variant"><!-- Tab 1: 홈 (ACTIVE) -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary font-bold active:scale-95 transition-transform duration-150 py-1" type="button">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm mt-0.5">홈</span>
+</button>
+<!-- Tab 2: 운동 추가 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 duration-150 py-1" type="button">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="text-label-sm font-label-sm mt-0.5">운동 추가</span>
+</button>
+<!-- Tab 3: 기록 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 duration-150 py-1" type="button">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="text-label-sm font-label-sm mt-0.5">기록</span>
+</button>
+<!-- Tab 4: 멀티 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 duration-150 py-1" type="button">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-sm font-label-sm mt-0.5">멀티</span>
+</button>
+<!-- Tab 5: 프로필 -->
+</nav>
+</div>
+</div>
+
+
+</body></html>

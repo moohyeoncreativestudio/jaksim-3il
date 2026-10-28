@@ -1,0 +1,387 @@
+<!DOCTYPE html><html class="dark" lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>작심삼일 - 로그인 &amp; 회원가입</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-high": "#282a2e",
+            "inverse-surface": "#e2e2e8",
+            "secondary-container": "#34ff8c",
+            "outline": "#859581",
+            "on-surface": "#e2e2e8",
+            "on-surface-variant": "#bbcbb5",
+            "on-secondary-container": "#007239",
+            "error": "#ffb4ab",
+            "on-primary-container": "#006119",
+            "on-tertiary-container": "#a8002b",
+            "surface-variant": "#333539",
+            "on-tertiary": "#680017",
+            "secondary": "#f5fff3",
+            "surface-bright": "#37393e",
+            "inverse-on-surface": "#2f3035",
+            "on-background": "#e2e2e8",
+            "primary-fixed-dim": "#21e54e",
+            "on-secondary-fixed-variant": "#005227",
+            "on-tertiary-fixed": "#40000a",
+            "secondary-fixed-dim": "#00e478",
+            "surface-tint": "#21e54e",
+            "on-primary-fixed-variant": "#005314",
+            "error-container": "#93000a",
+            "primary": "#73ff7b",
+            "tertiary-fixed": "#ffdad9",
+            "surface-container-highest": "#333539",
+            "tertiary": "#ffdada",
+            "surface-container-lowest": "#0c0e12",
+            "inverse-primary": "#006e1e",
+            "surface-container": "#1e2024",
+            "surface-container-low": "#1a1c20",
+            "primary-fixed": "#6fff79",
+            "surface-dim": "#111317",
+            "on-error": "#690005",
+            "secondary-fixed": "#60ff98",
+            "on-primary-fixed": "#002204",
+            "tertiary-container": "#ffb3b4",
+            "primary-container": "#22e54e",
+            "surface": "#111317",
+            "on-error-container": "#ffdad6",
+            "on-secondary": "#003919",
+            "on-secondary-fixed": "#00210c",
+            "outline-variant": "#3c4b39",
+            "on-tertiary-fixed-variant": "#920024",
+            "tertiary-fixed-dim": "#ffb3b4",
+            "on-primary": "#00390b",
+            "background": "#111317"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xl": "3rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "margin-mobile": "1rem",
+            "margin": "1.5rem",
+            "space-md": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "metric-huge": ["Space Grotesk"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "metric-md": ["Space Grotesk"],
+            "label-sm": ["Space Grotesk"],
+            "body-md": ["Plus Jakarta Sans"],
+            "display-hero": ["Space Grotesk"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Space Grotesk"],
+            "headline-sm": ["Space Grotesk"],
+            "label-lg": ["Space Grotesk"],
+            "label-md": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "display-hero-mobile": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "metric-huge": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "metric-md": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+            "body-lg": ["17px", { "lineHeight": "26px", "fontWeight": "500" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-hero-mobile": ["42px", { "lineHeight": "46px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .neon-glow {
+      box-shadow: 0 0 24px rgba(34, 229, 78, 0.35), 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .neon-glow:active {
+      box-shadow: 0 0 12px rgba(34, 229, 78, 0.5);
+    }
+    /* Subtle Cyber Athletic Grid background pattern */
+    .bg-grid-cyber {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen flex flex-col justify-between selection:bg-primary-container selection:text-surface-container-lowest">
+<!-- Mobile Viewport Wrapper (Max 480px, strictly centered) -->
+<div class="w-full max-w-[480px] mx-auto min-h-screen flex flex-col justify-between bg-surface relative overflow-x-hidden border-x border-outline-variant/30 bg-grid-cyber">
+<!-- Top Glow Element -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-80 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- MAIN CONTENT CANVAS -->
+<main class="w-full px-margin-mobile pt-8 pb-12 flex-1 flex flex-col z-10">
+<!-- 1. BRAND HEADER & STREAK PREVIEW BANNER -->
+<header class="flex flex-col items-center text-center mb-space-lg">
+<!-- Brand Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/50 mb-space-sm shadow-sm">
+<span class="text-primary-container material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">작심삼일</span>
+<span class="text-primary-container material-symbols-outlined text-[18px] ml-0.5" style="font-variation-settings: &quot;FILL&quot; 1;">local_fire_department</span>
+</div>
+<!-- Streak Hook Graphic Node -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high/80 border border-primary-container/30 mb-space-md"><span class="material-symbols-outlined text-primary-container text-[14px]">bolt</span><span class="font-label-sm text-label-sm text-primary tracking-wide flex items-center gap-1">3일째부터 보너스 점수 UP!<span class="material-symbols-outlined text-primary-container text-[14px]">bolt</span></span></div>
+<!-- Big Headline -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mb-space-xs font-bold">
+          이번엔 진짜 <span class="text-primary-container drop-shadow-sm">3일 넘긴다</span>
+</h1>
+<!-- Subtitle -->
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[320px]">운동을 기록하고 점수를 모으세요.</p>
+<!-- 3-Day Habit Streak Miniature Visual Tracker -->
+<div class="flex items-center justify-center gap-2.5 mt-space-md pt-1">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">D-1</span>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container/30"></div>
+</div>
+<span class="text-outline-variant font-label-sm">→</span>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">D-2</span>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container/60"></div>
+</div>
+<span class="text-outline-variant font-label-sm">→</span>
+<div class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-surface-container-high border border-primary-container/80 shadow-[0_0_12px_rgba(34,229,78,0.25)]">
+<span class="font-label-sm text-label-sm text-primary-container font-bold">D-3 레벨업</span>
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></div>
+</div>
+</div>
+</header>
+<!-- 2. SEGMENTED TAB SWITCHER (Login / Sign-up) -->
+<section class="w-full mb-space-lg">
+<div class="w-full bg-surface-container p-1 rounded-full flex items-center border border-outline-variant/40" role="tablist">
+<button aria-selected="true" class="flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center bg-primary-container text-surface-container-lowest font-bold shadow-md cursor-pointer select-none" id="tab-login" onclick="switchAuthTab('login')" role="tab">
+            로그인
+          </button>
+<button aria-selected="false" class="flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface cursor-pointer select-none" id="tab-signup" onclick="switchAuthTab('signup')" role="tab">
+            회원가입
+          </button>
+</div>
+</section>
+<!-- 3. FORMS CONTAINER (Card Surface) -->
+<div class="bg-surface-container-low rounded-lg p-5 border border-outline-variant/40 shadow-xl backdrop-blur-md relative overflow-hidden">
+<!-- Subtle tactical corner accent -->
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary-container/10 to-transparent pointer-events-none"></div>
+<!-- 3A. LOGIN FORM -->
+<form class="flex flex-col gap-space-md transition-opacity duration-300" id="form-login" onsubmit="event.preventDefault();">
+<!-- ID Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1" for="login-id">
+<span class="material-symbols-outlined text-[15px] text-primary-container">badge</span>
+                아이디
+              </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4~20자</span>
+</div>
+<div class="relative flex items-center">
+<input autocomplete="username" class="w-full h-14 bg-surface-container-lowest border border-outline-variant/60 rounded-DEFAULT px-4 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md transition-all" id="login-id" placeholder="아이디를 입력하세요" type="text">
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1" for="login-password">
+<span class="material-symbols-outlined text-[15px] text-primary-container">lock</span>
+                비밀번호
+              </label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">8자 이상</span>
+</div>
+<div class="relative flex items-center">
+<input autocomplete="current-password" class="w-full h-14 bg-surface-container-lowest border border-outline-variant/60 rounded-DEFAULT px-4 pr-12 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md transition-all" id="login-password" placeholder="비밀번호를 입력하세요" type="password">
+<button aria-label="비밀번호 보기 토글" class="absolute right-3.5 text-on-surface-variant hover:text-primary-container transition-colors p-1" onclick="togglePasswordVisibility('login-password', 'pwd-icon-login')" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pwd-icon-login">visibility</span>
+</button>
+</div>
+</div>
+<!-- Humor Checkbox: 3-day Persistent Login -->
+<div class="pt-1">
+<label class="flex items-center gap-3 cursor-pointer group select-none">
+<div class="relative flex items-center justify-center">
+<input checked="" class="peer appearance-none w-5 h-5 rounded-md bg-surface-container-lowest border border-outline-variant checked:bg-primary-container checked:border-primary-container focus:ring-0 focus:ring-offset-0 cursor-pointer transition-all" type="checkbox">
+<span class="material-symbols-outlined text-surface-container-lowest text-[16px] absolute opacity-0 peer-checked:opacity-100 font-bold pointer-events-none transition-opacity">check</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors flex items-center gap-1">
+<span class="">30일 연속 자동 로그인 유지하기</span>
+<span class="text-xs">⚡️</span>
+</span>
+</label>
+</div>
+<!-- Primary CTA Button (h-14, Neon Volt Glow) -->
+<div class="pt-2">
+<button class="w-full h-14 bg-primary-container text-surface-container-lowest rounded-full font-label-lg text-label-lg flex items-center justify-center gap-2 neon-glow font-bold active:scale-[0.98] transition-transform duration-150 cursor-pointer" type="button">
+<span class="">작심하러 가기</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<!-- Auxiliary Sub Links -->
+<div class="flex items-center justify-center gap-4 pt-1 font-body-sm text-body-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors py-1" href="javascript:void(0)">아이디 찾기</a>
+<span class="text-outline-variant text-xs">|</span>
+<a class="hover:text-primary transition-colors py-1" href="javascript:void(0)">비밀번호 재설정</a>
+</div>
+</form>
+<!-- 3B. SIGN-UP FORM (Interactive Alternate State) -->
+<form class="hidden flex-col gap-space-md transition-opacity duration-300" id="form-signup" onsubmit="event.preventDefault();">
+<!-- ID Field with guidance pill -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1" for="signup-id">
+<span class="material-symbols-outlined text-[15px] text-primary-container">badge</span>
+                아이디
+              </label>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-2 py-0.5 rounded-full border border-primary-container/20">영문 소문자·숫자 4~20자</span>
+</div>
+<div class="relative flex items-center">
+<input autocomplete="off" class="w-full h-14 bg-surface-container-lowest border border-outline-variant/60 rounded-DEFAULT px-4 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md transition-all" id="signup-id" placeholder="영문, 숫자 4~20자" type="text">
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1" for="signup-password">
+<span class="material-symbols-outlined text-[15px] text-primary-container">lock</span>
+                비밀번호
+              </label>
+<span class="font-label-sm text-label-sm text-primary-container bg-primary-container/10 px-2 py-0.5 rounded-full border border-primary-container/20">8자 이상 필수</span>
+</div>
+<div class="relative flex items-center">
+<input autocomplete="new-password" class="w-full h-14 bg-surface-container-lowest border border-outline-variant/60 rounded-DEFAULT px-4 pr-12 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md transition-all" id="signup-password" placeholder="8자 이상 입력하세요" type="password">
+<button aria-label="비밀번호 보기 토글" class="absolute right-3.5 text-on-surface-variant hover:text-primary-container transition-colors p-1" onclick="togglePasswordVisibility('signup-password', 'pwd-icon-signup')" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pwd-icon-signup">visibility</span>
+</button>
+</div>
+</div>
+<!-- Password Confirm Field -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-1" for="signup-password-confirm">
+<span class="material-symbols-outlined text-[15px] text-primary-container">verified_user</span>
+              비밀번호 확인
+            </label>
+<div class="relative flex items-center">
+<input autocomplete="new-password" class="w-full h-14 bg-surface-container-lowest border border-outline-variant/60 rounded-DEFAULT px-4 pr-12 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md transition-all" id="signup-password-confirm" placeholder="비밀번호를 한 번 더 입력하세요" type="password">
+<button aria-label="비밀번호 재확인 보기 토글" class="absolute right-3.5 text-on-surface-variant hover:text-primary-container transition-colors p-1" onclick="togglePasswordVisibility('signup-password-confirm', 'pwd-icon-signup-confirm')" type="button">
+<span class="material-symbols-outlined text-[20px]" id="pwd-icon-signup-confirm">visibility</span>
+</button>
+</div>
+</div>
+<!-- Commitment Checklist Box -->
+<div class="p-3 bg-surface-container rounded-DEFAULT border border-outline-variant/30 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary-container text-[18px] mt-0.5">fitness_center</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+              가입 즉시 <strong class="text-on-surface">작심 1일차</strong> 스택이 적립되며, 3일 완료 시 축하 루틴 뱃지가 오픈됩니다.
+            </p>
+</div>
+<!-- Sign-up CTA Button -->
+<div class="pt-1">
+<button class="w-full h-14 bg-primary-container text-surface-container-lowest rounded-full font-label-lg text-label-lg flex items-center justify-center gap-2 neon-glow font-bold active:scale-[0.98] transition-transform duration-150 cursor-pointer" type="button">
+<span class="">오늘부터 작심</span>
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</button>
+</div>
+<!-- Return to Login Link -->
+<div class="text-center pt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="">이미 계정이 있으신가요?</span>
+<button class="text-primary hover:underline font-bold ml-1.5 cursor-pointer" onclick="switchAuthTab('login')" type="button">
+              로그인하기
+            </button>
+</div>
+</form>
+</div>
+</main>
+<!-- 5. WITTY FITNESS MOTIVATION FOOTER (Strictly No Bottom Nav Bar) -->
+<footer class="w-full px-margin-mobile pb-8 pt-2 text-center z-10">
+
+<p class="font-label-sm text-label-sm text-outline mt-3">
+        © 2025 작심삼일 (JAKSIM-3IL). ALL REPS COUNT.
+      </p>
+</footer>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    function switchAuthTab(type) {
+      const loginTab = document.getElementById('tab-login');
+      const signupTab = document.getElementById('tab-signup');
+      const loginForm = document.getElementById('form-login');
+      const signupForm = document.getElementById('form-signup');
+
+      if (type === 'login') {
+        // Toggle Buttons Style
+        loginTab.className = "flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center bg-primary-container text-surface-container-lowest font-bold shadow-md cursor-pointer select-none";
+        loginTab.setAttribute('aria-selected', 'true');
+        
+        signupTab.className = "flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface cursor-pointer select-none";
+        signupTab.setAttribute('aria-selected', 'false');
+
+        // Toggle Forms
+        loginForm.classList.remove('hidden');
+        loginForm.classList.add('flex');
+        signupForm.classList.add('hidden');
+        signupForm.classList.remove('flex');
+      } else {
+        // Toggle Buttons Style
+        signupTab.className = "flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center bg-primary-container text-surface-container-lowest font-bold shadow-md cursor-pointer select-none";
+        signupTab.setAttribute('aria-selected', 'true');
+
+        loginTab.className = "flex-1 py-3 px-4 rounded-full font-label-lg text-label-lg transition-all duration-200 text-center text-on-surface-variant hover:text-on-surface cursor-pointer select-none";
+        loginTab.setAttribute('aria-selected', 'false');
+
+        // Toggle Forms
+        signupForm.classList.remove('hidden');
+        signupForm.classList.add('flex');
+        loginForm.classList.add('hidden');
+        loginForm.classList.remove('flex');
+      }
+    }
+
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (!input || !icon) return;
+
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+  </script>
+
+
+</body></html>

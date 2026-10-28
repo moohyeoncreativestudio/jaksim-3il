@@ -1,0 +1,404 @@
+<!DOCTYPE html><html class="dark" lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>운동 추가 - 작심삼일</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#22e54e",
+            "surface-variant": "#333539",
+            "outline-variant": "#3c4b39",
+            "on-error": "#690005",
+            "on-secondary-fixed-variant": "#005227",
+            "tertiary-container": "#ffb3b4",
+            "inverse-primary": "#006e1e",
+            "primary-fixed-dim": "#21e54e",
+            "secondary-fixed-dim": "#00e478",
+            "error-container": "#93000a",
+            "on-tertiary": "#680017",
+            "primary": "#73ff7b",
+            "on-tertiary-container": "#a8002b",
+            "inverse-on-surface": "#2f3035",
+            "on-primary-fixed": "#002204",
+            "on-background": "#e2e2e8",
+            "outline": "#859581",
+            "on-secondary-container": "#007239",
+            "inverse-surface": "#e2e2e8",
+            "on-tertiary-fixed": "#40000a",
+            "surface-container-highest": "#333539",
+            "on-secondary": "#003919",
+            "tertiary-fixed-dim": "#ffb3b4",
+            "on-tertiary-fixed-variant": "#920024",
+            "surface-container": "#1e2024",
+            "on-surface": "#e2e2e8",
+            "on-surface-variant": "#bbcbb5",
+            "on-error-container": "#ffdad6",
+            "surface-container-lowest": "#0c0e12",
+            "tertiary-fixed": "#ffdad9",
+            "surface-tint": "#21e54e",
+            "surface-bright": "#37393e",
+            "on-secondary-fixed": "#00210c",
+            "primary-fixed": "#6fff79",
+            "surface-container-low": "#1a1c20",
+            "error": "#ffb4ab",
+            "surface": "#111317",
+            "background": "#111317",
+            "secondary": "#f5fff3",
+            "on-primary-container": "#006119",
+            "secondary-fixed": "#60ff98",
+            "tertiary": "#ffdada",
+            "on-primary-fixed-variant": "#005314",
+            "surface-dim": "#111317",
+            "surface-container-high": "#282a2e",
+            "secondary-container": "#34ff8c",
+            "on-primary": "#00390b"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "gutter-mobile": "0.75rem",
+            "space-2xl": "3rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-md": "1rem",
+            "margin-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Space Grotesk"],
+            "headline-lg-mobile": ["Space Grotesk"],
+            "display-hero": ["Space Grotesk"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Space Grotesk"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Space Grotesk"],
+            "metric-md": ["Space Grotesk"],
+            "label-md": ["Space Grotesk"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-sm": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"],
+            "label-sm": ["Space Grotesk"],
+            "metric-huge": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "headline-lg": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "60px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+            "body-lg": ["17px", { "lineHeight": "26px", "fontWeight": "500" }],
+            "display-hero-mobile": ["42px", { "lineHeight": "46px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "metric-md": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "metric-huge": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Ambient Neon Glow Helpers */
+    .neon-glow-primary {
+      box-shadow: 0 0 24px rgba(34, 229, 78, 0.35), 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .neon-border-selected {
+      box-shadow: 0 0 16px rgba(34, 229, 78, 0.25), inset 0 0 8px rgba(34, 229, 78, 0.1);
+    }
+    /* Hide scrollbars for smooth chip scroll */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary-container selection:text-black">
+<!-- Mobile Screen Container (Max 480px) -->
+<div class="w-full max-w-[480px] min-h-screen bg-surface flex flex-col relative pb-[13rem]">
+<!-- 1. Top App Bar -->
+<header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md px-margin-mobile h-14 flex items-center justify-between border-b border-outline-variant"><!-- Leading Brand Unit -->
+<div class="flex items-center gap-1.5 active:scale-95 transition-transform duration-150 cursor-pointer">
+  <span class="material-symbols-outlined text-primary-container fill-1" data-icon="local_fire_department">local_fire_department</span>
+  <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">작심삼일</span>
+</div>
+<!-- Trailing Action Profile & Settings -->
+<div class="flex items-center gap-2">
+  <button aria-label="Settings" class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-150 p-1 rounded-full" type="button">
+    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+  </button>
+  <div class="relative group">
+    <div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-primary-fixed-dim font-label-md text-label-md cursor-pointer hover:border-primary transition-colors">
+      MK
+    </div>
+    <!-- Profile / Logout Quick Hint Overlay -->
+    <div class="absolute right-0 top-10 hidden group-hover:flex flex-col bg-surface-container-highest border border-outline-variant rounded-DEFAULT p-2 shadow-2xl z-50 min-w-[110px]">
+      <span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-1">musclekim</span>
+      <div class="h-px bg-outline-variant my-1"></div>
+      <button class="font-label-sm text-label-sm text-error hover:bg-error-container/20 rounded px-2 py-1 text-left flex items-center gap-1">
+        <span class="material-symbols-outlined text-[14px]" data-icon="logout">logout</span> 로그아웃
+      </button>
+    </div>
+  </div>
+</div></header>
+<!-- Main Content Area -->
+<main class="flex-1 px-margin-mobile pt-space-sm flex flex-col gap-space-lg">
+<!-- 2. 오늘 운동 점수 미니 게이지 바 -->
+<section class="bg-surface-container-low p-space-md rounded-lg border border-outline-variant/30 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px] fill-1">bolt</span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">오늘 운동 점수 <span class="font-headline-sm text-headline-sm text-primary font-bold">6</span> / 20점</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold bg-primary-container/15 px-2 py-0.5 rounded-full border border-primary/20">+14점 남음</span>
+</div>
+<!-- Progress Bar Track -->
+<div class="w-full bg-surface-variant h-2.5 rounded-full overflow-hidden p-[1px]">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500 shadow-[0_0_12px_#22e54e]" style="width: 30%;"></div>
+</div>
+</section>
+<!-- 3. 운동 타입 세그먼트 탭 2개 (유산소 / 근력) -->
+<section class="flex bg-surface-container-low p-1 rounded-full border border-outline-variant/30">
+<button class="flex-1 py-3 text-center rounded-full bg-primary-container text-black font-headline-sm text-headline-sm font-bold shadow-md transition-all active:scale-[0.98]" type="button">
+          유산소
+        </button>
+<button class="flex-1 py-3 text-center rounded-full bg-surface-container text-on-surface-variant font-headline-sm text-headline-sm font-medium hover:text-on-surface transition-all active:scale-[0.98]" type="button">
+          근력
+        </button>
+</section>
+<!-- 4. 종목 선택 칩 (가로 스크롤) -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">종목 선택</span>
+<span class="font-label-sm text-label-sm text-primary">유산소 맞춤</span>
+</div>
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1">
+<!-- 러닝 (선택됨) -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container-high border-2 border-primary-container text-primary font-label-lg text-label-lg font-bold neon-border-selected active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] fill-1 text-primary">directions_run</span>
+<span class="">러닝</span>
+</button>
+<!-- 복싱 -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant font-label-lg text-label-lg font-medium hover:text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">sports_mma</span>
+<span class="">복싱</span>
+</button>
+<!-- 축구 -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant font-label-lg text-label-lg font-medium hover:text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">sports_soccer</span>
+<span class="">축구</span>
+</button>
+<!-- 사이클 -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant font-label-lg text-label-lg font-medium hover:text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">directions_bike</span>
+<span class="">사이클</span>
+</button>
+<!-- 수영 -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant font-label-lg text-label-lg font-medium hover:text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">pool</span>
+<span class="">수영</span>
+</button>
+<!-- 줄넘기 -->
+<button class="shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant font-label-lg text-label-lg font-medium hover:text-on-surface active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">sports</span>
+<span class="">줄넘기</span>
+</button>
+<!-- + 직접 입력 -->
+<button class="shrink-0 flex items-center gap-1 px-3.5 py-2.5 rounded-full bg-surface-variant/40 border border-outline/30 text-on-surface font-label-lg text-label-lg font-medium hover:border-primary active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">직접 입력</span>
+</button>
+</div>
+</section>
+<!-- 5. 운동 시간 조절 카드 -->
+<section class="bg-surface-container-low p-space-lg rounded-lg border border-outline-variant/30 flex flex-col items-center gap-space-md text-center">
+<span class="font-label-md text-label-md text-on-surface-variant tracking-wider uppercase">운동 시간</span>
+<!-- Big Number Counter -->
+<div class="flex items-baseline justify-center gap-1 my-1">
+<span class="font-display-hero-mobile text-display-hero-mobile font-bold text-on-surface tracking-tighter text-white" id="duration-val">40</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">분</span>
+</div>
+<!-- 4 Stepper Controls -->
+<div class="grid grid-cols-4 gap-2 w-full max-w-sm pt-1">
+<button class="py-2.5 px-2 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-label-md text-label-md font-bold hover:bg-surface-variant active:scale-95 transition-transform" onclick="adjustTime(-10)" type="button">
+            -10분
+          </button>
+<button class="py-2.5 px-2 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-label-md text-label-md font-bold hover:bg-surface-variant active:scale-95 transition-transform" onclick="adjustTime(-1)" type="button">
+            -1분
+          </button>
+<button class="py-2.5 px-2 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-label-md text-label-md font-bold hover:bg-surface-variant active:scale-95 transition-transform" onclick="adjustTime(1)" type="button">
+            +1분
+          </button>
+<button class="py-2.5 px-2 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-label-md text-label-md font-bold hover:bg-surface-variant active:scale-95 transition-transform" onclick="adjustTime(10)" type="button">
+            +10분
+          </button>
+</div>
+</section>
+<!-- 6. 운동 강도 선택 카드 3개 -->
+<section class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">운동 강도 선택</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">정확한 칼로리/점수 산출</span>
+</div>
+<!-- Option 1: 가볍게 · 강도 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-between cursor-pointer hover:border-outline/50 active:scale-[0.99] transition-all">
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">가볍게 · 강도 1</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">편하게 대화할 수 있었다</span>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center shrink-0"></div>
+</div>
+<!-- Option 2: 보통 · 강도 2 (선택됨) -->
+<div class="p-space-md rounded-lg bg-surface-container-high border-2 border-primary-container neon-border-selected flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all relative overflow-hidden">
+<div class="flex flex-col gap-0.5 z-10">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-white">보통 · 강도 2</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-container text-black font-bold">추천</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">짧은 문장 정도만 말할 수 있었다</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-primary-container text-black flex items-center justify-center shrink-0 shadow-[0_0_8px_#22e54e] z-10">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+</div>
+<!-- Option 3: 힘들게 · 강도 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-between cursor-pointer hover:border-outline/50 active:scale-[0.99] transition-all">
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">힘들게 · 강도 3</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">말하기 어려웠다</span>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center shrink-0"></div>
+</div>
+</section>
+<!-- 7. 인증샷 업로드 카드 -->
+<section class="border-2 border-dashed border-outline-variant hover:border-primary-container/60 bg-surface-container-low/60 rounded-lg p-space-md flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/40 flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">photo_camera</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">지금 사진 찍기</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-primary-container text-black font-bold">+1점</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">증거는 남겨야죠</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[22px]">chevron_right</span>
+</section>
+<!-- 8. 오늘 추가한 운동 목록 (히스토리 미니 리스트) -->
+<section class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between px-1">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">오늘 완료한 운동 (1개)</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">누적 +6점 반영됨</span>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">근력 6세트 · 하체</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-variant text-primary font-bold">+6점</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">오전 07:30 완료</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="수정" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-90 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button aria-label="삭제" class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-error active:scale-90 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- 9. 하단 고정 액션 영역 (Floating Bottom Action) -->
+<div class="fixed bottom-16 left-0 right-0 z-40 max-w-[480px] mx-auto px-margin-mobile pb-3 pt-4 bg-gradient-to-t from-surface via-surface/95 to-transparent">
+<!-- 예상 점수 요약 -->
+<div class="flex items-center justify-between mb-2.5 px-2">
+<span class="font-label-md text-label-md text-on-surface-variant">예상 획득 점수</span>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">
+<span class="text-primary font-headline-sm text-headline-sm font-bold">+8.9점</span> 획득 예정 <span class="text-on-surface-variant">→</span> 오늘 14.9 / 20점
+        </span>
+</div>
+<!-- 대형 저장하기 CTA 버튼 -->
+<button class="w-full h-14 rounded-full bg-primary-container text-black font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-2 neon-glow-primary hover:brightness-105 active:scale-[0.98] transition-all" type="button">
+<span class="">저장하기</span>
+<span class="material-symbols-outlined text-[20px] font-bold">arrow_forward</span>
+</button>
+</div>
+<!-- 10. BottomNavBar Component (Shared Component Anchor) -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around h-16 px-gutter-mobile max-w-[480px] mx-auto bg-surface-container dark:bg-surface-container shadow-2xl"><a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 transition-transform duration-150 py-1 flex-1" href="#">
+  <span class="material-symbols-outlined text-[24px]">home</span>
+  <span class="font-label-sm text-label-sm mt-0.5">홈</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary font-bold hover:text-primary dark:hover:text-primary transition-colors active:scale-95 transition-transform duration-150 py-1 flex-1 relative" href="#">
+  <div class="relative flex items-center justify-center">
+    <span class="material-symbols-outlined text-[26px] fill-1 text-primary">add_circle</span>
+    <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary animate-ping"></span>
+  </div>
+  <span class="font-label-sm text-label-sm mt-0.5 text-primary">운동 추가</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 transition-transform duration-150 py-1 flex-1" href="#">
+  <span class="material-symbols-outlined text-[24px]">monitoring</span>
+  <span class="font-label-sm text-label-sm mt-0.5">기록</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors active:scale-95 transition-transform duration-150 py-1 flex-1" href="#">
+  <span class="material-symbols-outlined text-[24px]">group</span>
+  <span class="font-label-sm text-label-sm mt-0.5">멀티</span>
+</a>
+</nav>
+</div>
+<!-- Inline Script for Interactive Steppers -->
+<script>
+    let currentMinutes = 40;
+    const durationElement = document.getElementById('duration-val');
+
+    function adjustTime(delta) {
+      currentMinutes = Math.max(1, currentMinutes + delta);
+      if (durationElement) {
+        durationElement.innerText = currentMinutes;
+      }
+    }
+  </script>
+
+
+</body></html>
