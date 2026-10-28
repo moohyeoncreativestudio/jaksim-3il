@@ -54,6 +54,10 @@
       h('a', { class: 'brand', href: '/' }, icon('local_fire_department', 'is-filled'), h('span', { class: 'brand__name', text: '작심삼일' })),
       h('div', { class: 'app-header__actions' }, settings, h('div', { class: 'menu-wrap' }, avatar, menu)),
     );
+    // 가운데 제목: <body data-title="멀티">처럼 지정한 화면에만 (Stitch 멀티 화면)
+    if (document.body.dataset.title) {
+      header.insertBefore(h('span', { class: 'app-header__title', text: document.body.dataset.title }), header.lastChild);
+    }
 
     const setMenu = (open) => {
       menu.hidden = !open;

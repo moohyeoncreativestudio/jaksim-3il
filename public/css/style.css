@@ -201,6 +201,16 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
   color: var(--primary);
   white-space: nowrap;
 }
+/* 가운데 제목 (멀티 화면) */
+.app-header__title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 700 18px/24px var(--font-display);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  pointer-events: none;
+}
 .app-header__actions { display: flex; align-items: center; gap: var(--space-sm); flex-shrink: 0; }
 .icon-btn {
   display: inline-flex;
