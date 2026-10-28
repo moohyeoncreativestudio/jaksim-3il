@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111317">
+<title>작심삼일 - 로그인 &amp; 회원가입</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="shell shell--grid">
+  <div class="auth-glow" aria-hidden="true"></div>
+
+  <main class="auth-main">
+    <!-- 브랜드 헤더 -->
+    <header class="auth-hero">
+      <div class="brand-badge">
+        <span class="icon is-filled" aria-hidden="true">local_fire_department</span>
+        <span class="brand-badge__name">작심삼일</span>
+        <span class="icon is-filled" aria-hidden="true">local_fire_department</span>
+      </div>
+      <div class="hook-badge">
+        <span class="icon" aria-hidden="true">bolt</span>
+        <span class="hook-badge__text">3일째부터 보너스 점수 UP!<span class="icon" aria-hidden="true">bolt</span></span>
+      </div>
+      <h1 class="auth-title t-headline-lg-mobile">이번엔 진짜 <span class="auth-title__accent">3일 넘긴다</span></h1>
+      <p class="auth-sub t-body-md">운동을 기록하고 점수를 모으세요.</p>
+      <div class="trio" aria-hidden="true">
+        <div class="trio__node">D-1<span class="trio__dot"></span></div>
+        <span class="trio__arrow">→</span>
+        <div class="trio__node">D-2<span class="trio__dot"></span></div>
+        <span class="trio__arrow">→</span>
+        <div class="trio__node trio__node--goal">D-3 레벨업<span class="trio__dot"></span></div>
+      </div>
+    </header>
+
+    <!-- 로그인 / 회원가입 탭 -->
+    <section class="auth-tabs">
+      <div class="seg" role="tablist">
+        <button class="seg__btn" id="tab-login" type="button" role="tab" aria-selected="true" aria-controls="form-login">로그인</button>
+        <button class="seg__btn" id="tab-signup" type="button" role="tab" aria-selected="false" aria-controls="form-signup">회원가입</button>
+      </div>
+    </section>
+
+    <div class="auth-card">
+      <!-- 로그인 -->
+      <form class="auth-form" id="form-login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="login-id"><span class="icon" aria-hidden="true">badge</span>아이디</label>
+            <span class="field__hint">4~20자</span>
+          </div>
+          <div class="field__box">
+            <input class="input" id="login-id" name="username" type="text" placeholder="아이디를 입력하세요"
+                   autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="20" required>
+          </div>
+          <p class="field__error" data-error-for="username" hidden></p>
+        </div>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="login-password"><span class="icon" aria-hidden="true">lock</span>비밀번호</label>
+            <span class="field__hint">8자 이상</span>
+          </div>
+          <div class="field__box">
+            <input class="input input--with-btn" id="login-password" name="password" type="password"
+                   placeholder="비밀번호를 입력하세요" autocomplete="current-password" maxlength="128" required>
+            <button class="input-btn" type="button" data-toggle-password="login-password" aria-label="비밀번호 보기">
+              <span class="icon" aria-hidden="true">visibility</span>
+            </button>
+          </div>
+          <p class="field__error" data-error-for="password" hidden></p>
+        </div>
+        <div class="auth-form__check">
+          <label class="check">
+            <span class="check__box">
+              <input class="check__input" type="checkbox" name="remember" checked>
+              <span class="icon check__mark" aria-hidden="true">check</span>
+            </span>
+            <span class="check__text">30일 연속 자동 로그인 유지하기 <span aria-hidden="true">⚡️</span></span>
+          </label>
+        </div>
+        <div class="auth-form__cta">
+          <button class="btn btn--primary" type="submit">
+            <span>작심하러 가기</span>
+            <span class="icon" aria-hidden="true">arrow_forward</span>
+          </button>
+        </div>
+        <div class="auth-links">
+          <button type="button" data-soon>아이디 찾기</button>
+          <span class="auth-links__sep" aria-hidden="true">|</span>
+          <button type="button" data-soon>비밀번호 재설정</button>
+        </div>
+      </form>
+
+      <!-- 회원가입 -->
+      <form class="auth-form" id="form-signup" role="tabpanel" aria-labelledby="tab-signup" novalidate hidden>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="signup-id"><span class="icon" aria-hidden="true">badge</span>아이디</label>
+            <span class="pill pill--soft">영문 소문자·숫자 4~20자</span>
+          </div>
+          <div class="field__box">
+            <input class="input" id="signup-id" name="username" type="text" placeholder="영문, 숫자 4~20자"
+                   autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="20" required>
+          </div>
+          <p class="field__error" data-error-for="username" hidden></p>
+        </div>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="signup-password"><span class="icon" aria-hidden="true">lock</span>비밀번호</label>
+            <span class="pill pill--soft">8자 이상 필수</span>
+          </div>
+          <div class="field__box">
+            <input class="input input--with-btn" id="signup-password" name="password" type="password"
+                   placeholder="8자 이상 입력하세요" autocomplete="new-password" maxlength="128" required>
+            <button class="input-btn" type="button" data-toggle-password="signup-password" aria-label="비밀번호 보기">
+              <span class="icon" aria-hidden="true">visibility</span>
+            </button>
+          </div>
+          <p class="field__error" data-error-for="password" hidden></p>
+        </div>
+        <div class="field">
+          <div class="field__head">
+            <label class="field__label" for="signup-password-confirm"><span class="icon" aria-hidden="true">verified_user</span>비밀번호 확인</label>
+          </div>
+          <div class="field__box">
+            <input class="input input--with-btn" id="signup-password-confirm" name="passwordConfirm" type="password"
+                   placeholder="비밀번호를 한 번 더 입력하세요" autocomplete="new-password" maxlength="128" required>
+            <button class="input-btn" type="button" data-toggle-password="signup-password-confirm" aria-label="비밀번호 확인 보기">
+              <span class="icon" aria-hidden="true">visibility</span>
+            </button>
+          </div>
+          <p class="field__error" data-error-for="passwordConfirm" hidden></p>
+        </div>
+        <div class="auth-note">
+          <span class="icon" aria-hidden="true">fitness_center</span>
+          <p>첫 운동을 기록하면 <strong>작심 1일차</strong>가 시작되고, 3일째부터 연속 보너스 +2점이 붙어요.</p>
+        </div>
+        <div>
+          <button class="btn btn--primary" type="submit">
+            <span>오늘부터 작심</span>
+            <span class="icon" aria-hidden="true">bolt</span>
+          </button>
+        </div>
+        <div class="auth-switch">
+          <span>이미 계정이 있으신가요?</span><button type="button" data-go-login>로그인하기</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="auth-footer">
+    <p class="t-label-sm">© <span id="year"></span> 작심삼일 (JAKSIM-3IL). ALL REPS COUNT.</p>
+  </footer>
+</div>
+
+<script src="/js/ui.js"></script>
+<script src="/js/login.js"></script>
+</body>
+</html>
