@@ -13,9 +13,100 @@
 </head>
 <body data-auth="pending" data-tab="records">
 <div class="shell shell--app">
-  <main class="page" id="page"></main>
+  <main class="page page--records" id="page" aria-busy="true">
+    <!-- 월 이동과 요약 -->
+    <section class="cal-top">
+      <div class="cal-top__row">
+        <div class="cal-nav">
+          <button class="cal-nav__btn" type="button" id="prev-month" aria-label="이전 달"><span class="icon" aria-hidden="true">chevron_left</span></button>
+          <h1 class="cal-nav__title" id="cal-title" aria-live="polite">&nbsp;</h1>
+          <button class="cal-nav__btn" type="button" id="next-month" aria-label="다음 달"><span class="icon" aria-hidden="true">chevron_right</span></button>
+        </div>
+        <span class="dday" id="dday" hidden><span class="dday__dot" aria-hidden="true"></span><span id="dday-text"></span></span>
+      </div>
+      <div class="ribbon">
+        <div class="ribbon__total">
+          <span class="ribbon__label">월간 누적</span>
+          <span class="ribbon__num" id="sum-total">0</span><span class="ribbon__unit">점</span>
+        </div>
+        <span class="ribbon__sep" aria-hidden="true"></span>
+        <div class="ribbon__stats">
+          <span>작심 <strong class="is-accent" id="sum-worked">0일</strong></span>
+          <span aria-hidden="true">·</span>
+          <span>휴식 <strong id="sum-rest">0일</strong></span>
+          <span aria-hidden="true">·</span>
+          <span>최장 <strong class="is-accent" id="sum-longest">0연속</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 범례 -->
+    <section class="cal-legend" aria-label="범례">
+      <div class="cal-legend__group">
+        <span>운동 강도:</span>
+        <span class="cal-legend__scale" aria-hidden="true"><i class="lv-1"></i><i class="lv-2"></i><i class="lv-3"></i><i class="lv-4"></i></span>
+      </div>
+      <div class="cal-legend__group">
+        <span class="cal-legend__item"><i class="is-rest" aria-hidden="true"></i>쉰 날</span>
+        <span class="cal-legend__item is-accent"><i class="is-today" aria-hidden="true"></i>오늘</span>
+      </div>
+    </section>
+
+    <!-- 캘린더 -->
+    <section class="cal-card">
+      <div class="cal-head" aria-hidden="true"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span class="is-sat">토</span><span class="is-sun">일</span></div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-foot">
+        <span class="cal-foot__headline"><span class="icon is-filled" aria-hidden="true">bolt</span><span id="streak-headline"></span></span>
+        <span class="cal-foot__next" id="streak-next"></span>
+      </div>
+    </section>
+
+    <!-- 날짜 상세 -->
+    <section class="day-card" id="day-card" aria-live="polite"></section>
+
+    <!-- 점수 추이 -->
+    <section class="trend-card">
+      <div class="trend-card__head">
+        <div>
+          <h2 class="trend-card__title">점수 추이</h2>
+          <p class="trend-card__sub" id="trend-sub"></p>
+        </div>
+        <div class="seg-sm" role="tablist" aria-label="그래프 단위">
+          <button class="seg-sm__btn" type="button" role="tab" data-mode="weekly" aria-selected="false">주차별</button>
+          <button class="seg-sm__btn" type="button" role="tab" data-mode="monthly" aria-selected="true">월별</button>
+        </div>
+      </div>
+      <div class="trend-box">
+        <div class="trend-box__top">
+          <span id="trend-peak"></span>
+          <span class="trend-box__now" id="trend-now"></span>
+        </div>
+        <div id="chart"></div>
+      </div>
+      <div class="trend-summary">
+        <div class="trend-stat">
+          <span class="trend-stat__label" id="avg-label">월 평균</span>
+          <span class="trend-stat__value" id="avg-value">-</span>
+          <span class="trend-stat__sub">점</span>
+        </div>
+        <div class="trend-stat">
+          <span class="trend-stat__label" id="best-label">최고 월</span>
+          <span class="trend-stat__value is-accent" id="best-value">-</span>
+          <span class="trend-stat__sub is-accent" id="best-sub"></span>
+        </div>
+        <div class="trend-stat" id="change-stat">
+          <span class="trend-stat__label" id="change-label">지난달 대비</span>
+          <span class="trend-stat__value trend-stat__change" id="change-value">-</span>
+          <span class="trend-stat__sub" id="change-sub"></span>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
 <script src="/js/ui.js"></script>
 <script src="/js/shell.js"></script>
+<script src="/js/chart.js"></script>
+<script src="/js/records.js"></script>
 </body>
 </html>

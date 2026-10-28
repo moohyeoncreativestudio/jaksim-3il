@@ -11,3 +11,4 @@ stitch_workout_rank_onboarding*/
 stitch_workout_self*/
 *.zip
 .vscode/
+scripts/.demo-signup.json

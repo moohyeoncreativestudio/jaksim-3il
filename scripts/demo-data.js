@@ -23,10 +23,11 @@ const PATTERN = [
   { workouts: [strength(8, '복근'), cardio('러닝', 20, 3)], photo: false }, // 9: 14.7
 ];
 
-// 지난달 1일 ~ 오늘의 예시 기록. 오늘은 사진을 넣지 않는다 (운동 추가 화면 썸네일이 실제 사진이어야 하므로).
-function buildDemo(now = new Date()) {
+// months개월 전 1일 ~ 오늘의 예시 기록 (기본 1 = 지난달 1일부터).
+// 오늘은 사진을 넣지 않는다 (운동 추가 화면 썸네일이 실제 사진이어야 하므로).
+function buildDemo(now = new Date(), months = 1) {
   const today = date.today(now);
-  const start = date.monthRange(date.addMonths(date.monthOf(today), -1)).start;
+  const start = date.monthRange(date.addMonths(date.monthOf(today), -months)).start;
   const days = date.eachDay(start, today);
   const workouts = [];
   const photos = [];
@@ -39,4 +40,20 @@ function buildDemo(now = new Date()) {
   return { start, today, workouts, photos };
 }
 
-module.exports = { DEMO_MEMO, DEMO_PHOTO_PREFIX, PATTERN, buildDemo };
+// 예시 데이터를 넣기 전 원래 가입일을 보관하는 로컬 파일 (DB 스키마에 칸을 늘리지 않기 위해, Git에는 올리지 않음)
+const fs = require('fs');
+const path = require('path');
+const BACKUP_FILE = path.join(__dirname, '.demo-signup.json');
+const readBackup = () => {
+  try {
+    return JSON.parse(fs.readFileSync(BACKUP_FILE, 'utf8'));
+  } catch {
+    return {};
+  }
+};
+const writeBackup = (data) => {
+  if (Object.keys(data).length) fs.writeFileSync(BACKUP_FILE, `${JSON.stringify(data, null, 2)}\n`);
+  else fs.rmSync(BACKUP_FILE, { force: true });
+};
+
+module.exports = { DEMO_MEMO, DEMO_PHOTO_PREFIX, PATTERN, buildDemo, readBackup, writeBackup, BACKUP_FILE };
