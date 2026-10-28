@@ -12,8 +12,32 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-auth="pending" data-tab="multi">
-<div class="shell shell--app">
-  <main class="page" id="page"></main>
+<div class="shell shell--app shell--multi">
+  <!-- 배경 빛과 점 패턴 (장식) -->
+  <div class="multi-bg" aria-hidden="true">
+    <div class="multi-bg__center"></div>
+    <div class="multi-bg__corner"></div>
+    <div class="multi-bg__bottom"></div>
+    <div class="multi-bg__dots"></div>
+  </div>
+  <!-- 멀티는 이번 버전에서 구현하지 않는다 (API·DB 없음) -->
+  <main class="page page--multi" id="page">
+    <div class="multi-emblem" aria-hidden="true">
+      <div class="multi-emblem__ring"></div>
+      <div class="multi-emblem__core">
+        <span class="icon multi-emblem__side multi-emblem__side--left">person</span>
+        <span class="icon is-filled multi-emblem__main">groups</span>
+        <span class="icon multi-emblem__side multi-emblem__side--right">person</span>
+      </div>
+      <span class="multi-emblem__node multi-emblem__node--a"></span>
+      <span class="multi-emblem__node multi-emblem__node--b"></span>
+    </div>
+    <div class="multi-copy">
+      <h1 class="multi-copy__title">COMING SOON</h1>
+      <p class="multi-copy__sub">같이 작심할 친구들, 곧 만나요</p>
+    </div>
+    <div class="multi-mark" aria-hidden="true"><span class="multi-mark__dot"></span><span class="multi-mark__line"></span></div>
+  </main>
 </div>
 <script src="/js/ui.js"></script>
 <script src="/js/shell.js"></script>

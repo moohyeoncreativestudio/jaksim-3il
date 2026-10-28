@@ -23,6 +23,7 @@
   tabs.signup.addEventListener('click', () => switchTab('signup'));
   document.querySelector('[data-go-login]').addEventListener('click', () => switchTab('login'));
   if (location.hash === '#signup') switchTab('signup');
+  if (new URLSearchParams(location.search).has('expired')) toast('로그인이 만료됐어요. 다시 로그인해 주세요.');
 
   // 비밀번호 보기 / 숨기기
   document.querySelectorAll('[data-toggle-password]').forEach((btn) => {

@@ -1563,3 +1563,76 @@ button.cal-day:active { transform: scale(0.95); }
 .trend-stat__change .icon { font-size: 16px; }
 #change-stat[data-tone='up'] .trend-stat__change, #change-stat[data-tone='up'] .trend-stat__sub { color: var(--primary); }
 #change-stat[data-tone='down'] .trend-stat__change, #change-stat[data-tone='down'] .trend-stat__sub { color: var(--tertiary-container); }
+
+/* ---------- 19. 멀티 (COMING SOON) ---------- */
+.shell--multi { overflow: hidden; }
+.multi-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.multi-bg__center {
+  position: absolute; top: 50%; left: 50%; width: 20rem; height: 20rem;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-full);
+  background: rgb(var(--primary-container-rgb) / 0.15);
+  filter: blur(100px);
+  animation: multi-glow 5s ease-in-out infinite;
+}
+@keyframes multi-glow { 0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.65; transform: translate(-50%, -50%) scale(1.08); } }
+.multi-bg__corner { position: absolute; top: -5rem; right: -5rem; width: 14rem; height: 14rem; border-radius: var(--radius-full); background: rgb(33 229 78 / 0.1); filter: blur(70px); }
+.multi-bg__bottom { position: absolute; bottom: -6rem; left: -5rem; width: 16rem; height: 16rem; border-radius: var(--radius-full); background: rgb(51 53 57 / 0.2); filter: blur(80px); }
+.multi-bg__dots { position: absolute; inset: 0; opacity: 0.03; background-image: radial-gradient(#22e54e 1px, transparent 1px); background-size: 24px 24px; }
+.shell--app .page--multi {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  padding: var(--header-h) var(--margin-mobile) 5rem;
+}
+.multi-emblem { position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-xl); }
+.multi-emblem__ring { position: absolute; width: 7rem; height: 7rem; border-radius: var(--radius-full); background: rgb(var(--primary-container-rgb) / 0.1); border: 1px solid rgb(var(--primary-container-rgb) / 0.2); filter: blur(4px); }
+.multi-emblem__core {
+  position: relative; width: 6rem; height: 6rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.5);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+}
+.multi-emblem__main { position: relative; z-index: 1; font-size: 34px; color: var(--primary-container); margin: 0 -8px; }
+.multi-emblem__side { font-size: 22px; color: var(--outline); opacity: 0.4; }
+.multi-emblem__side--left { transform: translateX(-4px); }
+.multi-emblem__side--right { transform: translateX(4px); }
+.multi-emblem__node { position: absolute; border-radius: var(--radius-full); }
+.multi-emblem__node--a { top: -4px; right: 4px; width: 10px; height: 10px; background: var(--primary-container); box-shadow: 0 0 10px #22e54e; }
+.multi-emblem__node--b { bottom: 8px; left: -4px; width: 6px; height: 6px; background: var(--outline-variant); }
+.multi-copy { display: flex; flex-direction: column; gap: 10px; max-width: 340px; }
+.multi-copy__title {
+  font: 700 clamp(34px, 11vw, 42px)/46px var(--font-display);
+  letter-spacing: -0.025em;
+  color: transparent;
+  background: linear-gradient(to bottom, #fff, #fff, var(--on-surface-variant));
+  -webkit-background-clip: text;
+  background-clip: text;
+  white-space: nowrap;
+}
+.multi-copy__sub { color: var(--on-surface-variant); font: 500 15px/1.625 var(--font-body); }
+.multi-mark { display: flex; align-items: center; gap: 6px; margin-top: var(--space-xl); opacity: 0.6; }
+.multi-mark__dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--primary-container); }
+.multi-mark__line { width: 2rem; height: 1px; background: linear-gradient(to right, var(--primary-container), transparent); }
+
+/* ---------- 20. 불러오기 실패 안내 ---------- */
+.load-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 12px var(--space-md);
+  background: rgb(var(--error-container-rgb) / 0.25);
+  border: 1px solid rgb(255 180 171 / 0.4);
+  border-radius: var(--radius);
+  color: var(--error);
+  font: 400 13px/18px var(--font-body);
+}
+.load-error__retry { flex-shrink: 0; padding: 6px 12px; border-radius: var(--radius-full); background: var(--surface-container-high); color: var(--on-surface); font: 700 12px/16px var(--font-display); }

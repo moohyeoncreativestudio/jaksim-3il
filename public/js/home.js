@@ -1,6 +1,6 @@
 // 홈 화면. 숫자는 모두 /api/home (서버의 lib/score.js 계산값)을 그대로 표시한다.
 (function () {
-  const { api, toast } = window.UI;
+  const { api } = window.UI;
   const $ = (id) => document.getElementById(id);
   const fmt = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
   const pct = (v, max) => `${Math.min(100, Math.max(0, (v / max) * 100))}%`;
@@ -81,10 +81,10 @@
     $('page').removeAttribute('aria-busy');
   }
 
-  window.App.ready.then(async (me) => {
-    if (!me) return;
+  async function load() {
     const r = await api('/api/home');
-    if (!r.ok) return toast(r.data.error || '홈 정보를 불러오지 못했어요.');
+    if (!r.ok) return window.UI.loadError(r.data.error || '홈 정보를 불러오지 못했어요.', load);
     render(r.data);
-  });
+  }
+  window.App.ready.then((me) => me && load());
 })();

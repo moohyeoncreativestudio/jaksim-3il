@@ -21,7 +21,10 @@
   // ---------- 캘린더 ----------
   async function loadMonth(ym) {
     const r = await api(`/api/calendar${ym ? `?month=${ym}` : ''}`);
-    if (!r.ok) return toast(r.data.error || '캘린더를 불러오지 못했어요.');
+    if (!r.ok) {
+      if (!state.cal) return window.UI.loadError(r.data.error || '캘린더를 불러오지 못했어요.', () => loadMonth(ym));
+      return toast(r.data.error || '캘린더를 불러오지 못했어요.');
+    }
     state.cal = r.data;
     state.selected = r.data.selected; // 이번 달이면 오늘, 지난달이면 선택 없음
     renderCalendar();
@@ -200,7 +203,7 @@
 
   async function loadStats() {
     const r = await api('/api/stats');
-    if (!r.ok) return toast(r.data.error || '점수 추이를 불러오지 못했어요.');
+    if (!r.ok) return window.UI.loadError(r.data.error || '점수 추이를 불러오지 못했어요.', loadStats);
     state.stats = r.data;
     renderTrend();
   }

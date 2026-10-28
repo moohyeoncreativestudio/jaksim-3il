@@ -391,7 +391,10 @@
 
   async function reload() {
     const r = await api('/api/workouts/today');
-    if (!r.ok) return toast(r.data.error || '기록을 불러오지 못했어요.');
+    if (!r.ok) {
+      if (!state.today) return window.UI.loadError(r.data.error || '오늘 기록을 불러오지 못했어요.', reload);
+      return toast(r.data.error || '기록을 불러오지 못했어요.');
+    }
     state.today = r.data;
     refreshAll();
   }

@@ -1,7 +1,7 @@
 // 앱 공통 틀: 로그인 확인, 공통 헤더(로고·점수 규칙 모달·이니셜 드롭다운), 하단 탭 바
 // 페이지는 <body data-auth="pending" data-tab="home|add|records|multi"> 와 <main class="page">만 두면 된다.
 (function () {
-  const { api, toast } = window.UI;
+  const { api, toast } = window.UI; // toast: 로그아웃 실패 안내
 
   const TABS = [
     { key: 'home', href: '/', icon: 'home', label: '홈' },
@@ -128,8 +128,13 @@
   async function init() {
     const r = await api('/api/me');
     if (!r.ok) {
-      if (r.status === 401) location.replace('/login.html');
-      else toast(r.data.error || '잠시 후 다시 시도해 주세요.');
+      if (r.status === 401) {
+        location.replace('/login.html');
+      } else {
+        // 네트워크·서버 오류: 빈 화면으로 두지 않고 안내와 다시 시도 버튼을 보여 준다
+        document.body.dataset.auth = 'ok';
+        window.UI.loadError(r.data.error || '잠시 후 다시 시도해 주세요.', () => location.reload());
+      }
       return null;
     }
     const shell = document.querySelector('.shell');
