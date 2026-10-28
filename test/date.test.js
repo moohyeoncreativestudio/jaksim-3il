@@ -72,6 +72,23 @@ test('월간 비교 기간: 이미 끝난 달은 최종 비교, 미래 달은 �
   assert.throws(() => date.comparisonPeriods(kst('2026-10-20T12:00:00'), '2026-11'), RangeError);
 });
 
+test('주간 비교 기간: 수요일 → 이번 주 월~수 vs 지난주 월~수', () => {
+  const p = date.weekComparisonPeriods(kst('2026-10-07T12:00:00'));
+  assert.equal(p.final, false);
+  assert.deepEqual([p.current.start, p.current.end], ['2026-10-05', '2026-10-07']);
+  assert.deepEqual([p.previous.start, p.previous.end], ['2026-09-28', '2026-09-30']);
+});
+
+test('주간 비교 기간: 월요일은 하루끼리, 일요일은 주 전체끼리(최종 비교)', () => {
+  const mon = date.weekComparisonPeriods(kst('2026-10-05T08:00:00'));
+  assert.deepEqual([mon.current.start, mon.current.end, mon.previous.start, mon.previous.end],
+    ['2026-10-05', '2026-10-05', '2026-09-28', '2026-09-28']);
+  const sun = date.weekComparisonPeriods(kst('2026-10-11T23:00:00'));
+  assert.equal(sun.final, true);
+  assert.deepEqual([sun.current.start, sun.current.end], ['2026-10-05', '2026-10-11']);
+  assert.deepEqual([sun.previous.start, sun.previous.end], ['2026-09-28', '2026-10-04']);
+});
+
 test('최근 12주 구간 목록', () => {
   const weeks = date.recentWeeks(kst('2026-10-07T12:00:00'));
   assert.equal(weeks.length, 12);

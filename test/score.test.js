@@ -148,9 +148,32 @@ test('주간 집계: 9/28~10/4 주 67점, 10/5~10/11 주 45.6점', () => {
   assert.equal(w2.total, 45.6);
   assert.equal(w2.inProgress, true);
   assert.equal(w2.diff, -21.4);
-  assert.equal(t.change, -21.4);
+  // 요약 증감은 같은 기간 비교: 10/5~10/7(45.6) vs 9/28~9/30(10)
+  assert.equal(t.change.final, false);
+  assert.deepEqual([t.change.previous.start, t.change.previous.end], ['2026-09-28', '2026-09-30']);
+  assert.equal(t.change.previous.total, 10);
+  assert.equal(t.change.current.total, 45.6);
+  assert.equal(t.change.diffLabel, '▲ 35.6점');
   assert.equal(t.best.label, '9/28');
   assert.equal(t.average, 22.3); // 진행 중인 10/5 주 제외: (0 + 0 + 67) / 3
+});
+
+test('주간 비교: 일요일(주가 끝난 날)은 주 전체끼리 비교', () => {
+  const c = score.weeklyComparison(kst('2026-10-11T20:00:00'), WORKOUTS, PHOTOS);
+  assert.equal(c.final, true);
+  assert.equal(c.current.total, 45.6); // 10/5~10/11
+  assert.equal(c.previous.total, 67); // 9/28~10/4
+  assert.equal(c.diffLabel, '▼ 21.4점');
+  assert.equal(c.rateLabel, '-31.9%');
+});
+
+test('주간 비교: 지난주 같은 기간 점수가 0이면 "지난주 기록 없음"', () => {
+  const c = score.weeklyComparison(kst('2026-10-01T20:00:00'), WORKOUTS, PHOTOS); // 목요일
+  assert.deepEqual([c.previous.start, c.previous.end], ['2026-09-21', '2026-09-24']);
+  assert.equal(c.previous.total, 0);
+  assert.equal(c.current.total, 22); // 9/28~10/1: 0 + 0 + 10 + 12
+  assert.equal(c.rate, null);
+  assert.equal(c.rateLabel, '지난주 기록 없음');
 });
 
 test('월별 집계: 홈·캘린더와 같은 값, 요약 증감은 같은 기간 비교', () => {
