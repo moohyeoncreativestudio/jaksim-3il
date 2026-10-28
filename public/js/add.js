@@ -1,6 +1,6 @@
 // 운동 추가 화면 (유산소 / 근력). 점수는 모두 서버(lib/score.js)가 계산한 값을 표시한다.
 (function () {
-  const { api, toast, confirm } = window.UI;
+  const { api, toast, confirm, upload } = window.UI;
   const $ = (id) => document.getElementById(id);
 
   const ACTIVITIES = [
@@ -19,7 +19,7 @@
   const freshStrength = () => ({ parts: [], sets: SETS.initial, memo: '', editingId: null });
 
   // 탭을 바꿔도 각 탭의 입력값은 그대로 둔다
-  const state = { tab: 'cardio', cardio: freshCardio(), strength: freshStrength(), today: null, saving: false };
+  const state = { tab: 'cardio', cardio: freshCardio(), strength: freshStrength(), today: null, saving: false, uploading: null };
 
   const clamp = (v, { min, max }) => Math.min(max, Math.max(min, v));
   const fmt = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
@@ -103,6 +103,7 @@
 
   function renderToday() {
     const t = state.today;
+    renderPhoto();
     $('today-score').textContent = fmt(t.exercise);
     $('today-remaining').textContent = t.remaining > 0 ? `+${fmt(t.remaining)}점 남음` : '오늘 운동 점수를 모두 채웠어요';
     $('today-gauge-fill').style.width = `${Math.min(100, (t.exercise / t.max) * 100)}%`;
@@ -229,6 +230,123 @@
     toast('삭제했어요');
   }
 
+  // ---------- 인증샷 ----------
+  const PHOTO_MAX_SIDE = 1280;
+  const PHOTO_MAX_BYTES = 2 * 1024 * 1024;
+
+  // 카드 상태: 업로드 전 / 업로드 중 / 인증 완료. 인증샷 점수(+1)는 서버의 하루 점수(day.photo)를 따른다.
+  function renderPhoto() {
+    const t = state.today;
+    const photo = t?.photos[t.photos.length - 1];
+    const card = $('photo-card');
+    const uploading = state.uploading != null;
+    card.dataset.state = uploading ? 'uploading' : photo ? 'done' : 'empty';
+    $('photo-pick').disabled = uploading;
+    $('photo-progress-row').hidden = !uploading;
+    $('photo-chevron').hidden = uploading || !!photo;
+    $('photo-delete').hidden = uploading || !photo;
+
+    const iconBox = $('photo-icon');
+    const hint = $('photo-hint');
+    const pill = $('photo-pill');
+    hint.classList.remove('is-warn');
+    if (uploading) {
+      const pct = Math.round(state.uploading * 100);
+      $('photo-title').textContent = '사진 올리는 중…';
+      $('photo-desc').textContent = `${pct}%`;
+      hint.textContent = '잠시만 기다려 주세요';
+      $('photo-progress-fill').style.width = `${pct}%`;
+      $('photo-progress').setAttribute('aria-valuenow', String(pct));
+      return;
+    }
+    if (photo) {
+      if (iconBox.dataset.photoId !== String(photo.id)) {
+        const img = document.createElement('img');
+        img.src = photo.imageUrl;
+        img.alt = '오늘 올린 인증 사진';
+        iconBox.replaceChildren(img);
+        iconBox.dataset.photoId = String(photo.id);
+      }
+      $('photo-title').textContent = '인증 완료';
+      $('photo-desc').textContent = `${photo.timeLabel} 업로드`;
+      const counted = t.day.photo > 0;
+      pill.className = `pill ${counted ? 'pill--solid' : 'pill--muted'}`;
+      pill.textContent = counted ? '+1점' : '+0점';
+      hint.textContent = counted ? '오늘 인증샷 +1점이 반영됐어요' : '운동을 기록해야 +1점이 반영돼요';
+      hint.classList.toggle('is-warn', !counted);
+      return;
+    }
+    if (iconBox.dataset.photoId) {
+      iconBox.replaceChildren(icon('photo_camera'));
+      delete iconBox.dataset.photoId;
+    }
+    $('photo-title').textContent = '지금 사진 찍기';
+    $('photo-desc').textContent = '증거는 남겨야죠';
+    pill.className = 'pill pill--solid';
+    pill.textContent = '+1점';
+    hint.textContent = '지금 찍은 사진을 올려 주세요';
+  }
+
+  // 긴 변 1280px, JPEG 품질 0.8로 줄인다 (2MB를 넘으면 품질을 조금 더 낮춘다)
+  async function shrinkImage(file) {
+    if (!file.type.startsWith('image/')) throw new Error('사진(이미지) 파일만 올릴 수 있어요.');
+    let bitmap;
+    try {
+      bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    } catch {
+      throw new Error('사진을 읽을 수 없어요. 다른 사진으로 다시 시도해 주세요.');
+    }
+    const scale = Math.min(1, PHOTO_MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    canvas.getContext('2d').drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close?.();
+    for (const quality of [0.8, 0.7, 0.6]) {
+      const out = await new Promise((r) => canvas.toBlob(r, 'image/jpeg', quality));
+      if (out && out.size <= PHOTO_MAX_BYTES) return out;
+    }
+    throw new Error('사진이 너무 커요. 다른 사진으로 다시 시도해 주세요.');
+  }
+
+  async function uploadPhoto(file) {
+    let jpeg;
+    try {
+      jpeg = await shrinkImage(file);
+    } catch (err) {
+      return toast(err.message);
+    }
+    state.uploading = 0;
+    renderPhoto();
+    const r = await upload('/api/photos', jpeg, 'image/jpeg', (p) => {
+      state.uploading = p;
+      renderPhoto();
+    });
+    state.uploading = null;
+    if (!r.ok) {
+      renderPhoto();
+      return toast(r.data.error || '사진을 올리지 못했어요.');
+    }
+    state.today = r.data;
+    refreshAll();
+    toast(r.data.day.photo > 0 ? '인증 완료! +1점' : '인증 완료! 운동을 기록하면 +1점이 반영돼요');
+  }
+
+  async function removePhoto() {
+    const photo = state.today?.photos[state.today.photos.length - 1];
+    if (!photo) return;
+    const ok = await confirm({ title: '인증 사진 삭제', message: '오늘 올린 인증 사진을 삭제할까요?', confirmText: '삭제', danger: true });
+    if (!ok) return;
+    const r = await api(`/api/photos/${photo.id}`, { method: 'DELETE' });
+    if (!r.ok) {
+      toast(r.data.error || '삭제하지 못했어요.');
+      return reload();
+    }
+    state.today = r.data;
+    refreshAll();
+    toast('사진을 삭제했어요');
+  }
+
   // ---------- 저장 ----------
   function hideCustomError() {
     $('custom-error').hidden = true;
@@ -317,7 +435,17 @@
   $('memo').addEventListener('input', (e) => {
     state.strength.memo = e.target.value;
   });
-  $('photo-card').addEventListener('click', () => toast('곧 열려요'));
+  $('photo-pick').addEventListener('click', () => {
+    if (state.uploading != null) return;
+    if (state.today?.photos.length) return toast('사진을 바꾸려면 삭제한 뒤 다시 찍어 주세요.');
+    $('photo-input').value = '';
+    $('photo-input').click();
+  });
+  $('photo-input').addEventListener('change', (e) => {
+    const file = e.target.files?.[0];
+    if (file) uploadPhoto(file);
+  });
+  $('photo-delete').addEventListener('click', removePhoto);
   $('save-btn').addEventListener('click', save);
 
   if (location.hash === '#strength') state.tab = 'strength';

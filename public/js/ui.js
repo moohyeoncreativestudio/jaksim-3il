@@ -83,5 +83,26 @@
     });
   }
 
-  window.UI = { api, toast, confirm: confirmDialog };
+  // 파일 업로드 (진행률 콜백). fetch는 업로드 진행률을 알 수 없어 XMLHttpRequest를 쓴다.
+  function upload(path, body, contentType, onProgress) {
+    return new Promise((resolve) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', path);
+      xhr.setRequestHeader('Content-Type', contentType);
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) onProgress?.(e.loaded / e.total);
+      };
+      xhr.onload = () => {
+        let data = {};
+        try {
+          data = JSON.parse(xhr.responseText);
+        } catch {}
+        resolve({ ok: xhr.status >= 200 && xhr.status < 300, status: xhr.status, data });
+      };
+      xhr.onerror = () => resolve({ ok: false, status: 0, data: { error: '네트워크 연결을 확인해 주세요.' } });
+      xhr.send(body);
+    });
+  }
+
+  window.UI = { api, toast, confirm: confirmDialog, upload };
 })();
