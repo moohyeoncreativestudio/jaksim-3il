@@ -11,7 +11,9 @@
     "dev": "node --watch --env-file-if-exists=.env dev-server.js",
     "start": "node --env-file-if-exists=.env dev-server.js",
     "test": "node --test",
-    "test:db": "node --env-file=.env --test"
+    "test:db": "node --env-file=.env --test",
+    "seed": "node --env-file=.env scripts/seed-demo.js",
+    "clear-demo": "node --env-file=.env scripts/clear-demo.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",

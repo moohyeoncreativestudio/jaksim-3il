@@ -13,9 +13,116 @@
 </head>
 <body data-auth="pending" data-tab="home">
 <div class="shell shell--app">
-  <main class="page" id="page"></main>
+  <main class="page page--home" id="page" aria-busy="true">
+    <!-- 날짜와 인사 -->
+    <section class="home-greet">
+      <span class="home-greet__date" id="date-label">&nbsp;</span>
+      <h1 class="home-greet__title"><span class="home-greet__name" id="username"></span> 님, 오늘도 작심! <span class="home-greet__bolt" aria-hidden="true">⚡</span></h1>
+    </section>
+
+    <!-- 이번 달 누적 점수 -->
+    <section class="month-card">
+      <div class="month-card__glow" aria-hidden="true"></div>
+      <div class="month-card__inner">
+        <div class="month-card__head">
+          <span class="month-card__label"><span class="icon" aria-hidden="true">stars</span><span id="month-label">이번 달 누적 점수</span></span>
+        </div>
+        <div class="month-card__metric">
+          <span class="month-card__num" id="month-total">0</span>
+          <span class="month-card__unit">점</span>
+        </div>
+        <div class="compare" id="compare">
+          <span class="compare__prev" id="compare-prev"></span>
+          <span class="compare__arrow" aria-hidden="true">→</span>
+          <span class="compare__chip" id="compare-chip"></span>
+        </div>
+        <div class="month-card__foot">
+          <p class="month-card__headline" id="compare-headline"></p>
+          <a class="month-card__link" href="/records.html">상세 분석 <span class="icon" aria-hidden="true">chevron_right</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 연속 배너와 이번 달 요약 3칸 -->
+    <section class="home-summary">
+      <div class="streak-banner" id="streak-banner">
+        <div class="streak-banner__main">
+          <span class="streak-banner__icon"><span class="icon is-filled" aria-hidden="true">bolt</span></span>
+          <div class="streak-banner__text">
+            <p class="streak-banner__title" id="streak-title"></p>
+            <p class="streak-banner__sub" id="streak-sub"></p>
+          </div>
+        </div>
+        <span class="icon is-filled streak-banner__fire" aria-hidden="true">local_fire_department</span>
+      </div>
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="stat__label">목표 달성</span>
+          <span class="stat__value" id="stat-worked">작심 0일</span>
+          <span class="stat__sub" id="stat-ratio">0% 완료</span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">피드 인증</span>
+          <span class="stat__value" id="stat-photo">인증샷 0일</span>
+          <span class="stat__sub stat__sub--mint" id="stat-photo-pt">+0pt 획득</span>
+        </div>
+        <div class="stat stat--accent">
+          <span class="stat__label stat__label--accent">현재 스트릭</span>
+          <span class="stat__value stat__value--accent" id="stat-streak"></span>
+          <span class="stat__sub stat__sub--plain" id="stat-streak-sub"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 이번 주 루틴 흐름 -->
+    <section class="week-card">
+      <div class="week-card__head">
+        <span class="week-card__title"><span class="icon" aria-hidden="true">calendar_month</span>이번 주 루틴 흐름</span>
+        <span class="week-card__range" id="week-range"></span>
+      </div>
+      <ol class="week-strip" id="week-strip"></ol>
+    </section>
+
+    <!-- 오늘 점수 -->
+    <section class="today-card">
+      <div class="today-card__head">
+        <div>
+          <h2 class="today-card__title">오늘 점수</h2>
+          <p class="today-card__desc">데일리 목표치 도달 현황</p>
+        </div>
+        <div class="today-card__total"><span class="today-card__num" id="today-total">0</span><span class="today-card__max"> / 23점</span></div>
+      </div>
+      <div class="meter">
+        <div class="meter__head">
+          <span class="meter__name"><span class="icon meter__icon" aria-hidden="true">fitness_center</span>운동 기록</span>
+          <span class="meter__value" id="meter-exercise"></span>
+        </div>
+        <div class="meter__track"><div class="meter__fill" id="meter-exercise-fill"></div></div>
+      </div>
+      <div class="meter meter--bonus">
+        <div class="meter__head">
+          <span class="meter__name"><span class="icon meter__icon" aria-hidden="true">bolt</span>연속 보너스</span>
+          <span class="meter__value" id="meter-streak"></span>
+        </div>
+        <div class="meter__track"><div class="meter__fill" id="meter-streak-fill"></div></div>
+      </div>
+      <div class="meter meter--photo">
+        <div class="meter__head">
+          <span class="meter__name"><span class="icon meter__icon" aria-hidden="true">photo_camera</span>인증샷 업로드</span>
+          <span class="meter__value" id="meter-photo"></span>
+        </div>
+        <div class="meter__track"><div class="meter__fill" id="meter-photo-fill"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 하단 고정 버튼 -->
+  <div class="home-cta">
+    <a class="btn btn--primary home-cta__btn" href="/add.html"><span class="icon is-filled" aria-hidden="true">add</span><span>운동 추가하기</span></a>
+  </div>
 </div>
 <script src="/js/ui.js"></script>
 <script src="/js/shell.js"></script>
+<script src="/js/home.js"></script>
 </body>
 </html>

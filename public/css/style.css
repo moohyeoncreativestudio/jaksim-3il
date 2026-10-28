@@ -998,3 +998,244 @@ body[data-auth='pending'] .shell--app { visibility: hidden; }
 .action-bar__gain { color: var(--primary); font: 700 18px/24px var(--font-display); }
 .action-bar__arrow { color: var(--on-surface-variant); }
 .action-bar .btn { font: 700 18px/24px var(--font-display); color: #000; }
+
+/* ---------- 17. 홈 화면 ---------- */
+.shell--app .page--home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding-top: calc(var(--header-h) + var(--space-sm));
+  padding-bottom: 9.5rem; /* 하단 고정 버튼 + 탭 바 */
+}
+:root { --secondary-fixed: #60ff98; --secondary-fixed-dim: #00e478; --primary-fixed: #6fff79; --redline-rgb: 255 59 86; }
+
+/* 인사 */
+.home-greet { display: flex; flex-direction: column; gap: 2px; padding-top: var(--space-sm); }
+.home-greet__date { color: var(--on-surface-variant); font: 600 12px/16px var(--font-display); letter-spacing: 0.05em; }
+.home-greet__title { font: 700 26px/32px var(--font-display); letter-spacing: -0.025em; }
+.home-greet__name { overflow-wrap: anywhere; }
+.home-greet__bolt { display: inline-block; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+/* 이번 달 누적 점수 카드 */
+.month-card {
+  position: relative;
+  overflow: hidden;
+  padding: 1.25rem;
+  background: var(--surface-container-low);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.6);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 28px rgb(var(--primary-container-rgb) / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+.month-card__glow {
+  position: absolute;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  width: 11rem;
+  height: 11rem;
+  border-radius: var(--radius-full);
+  background: rgb(var(--primary-container-rgb) / 0.1);
+  filter: blur(64px);
+  pointer-events: none;
+}
+.month-card__inner { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+.month-card__head { display: flex; align-items: center; justify-content: space-between; }
+.month-card__label { display: flex; align-items: center; gap: 4px; color: var(--on-surface-variant); font: 600 12px/16px var(--font-display); letter-spacing: 0.04em; }
+.month-card__label .icon { font-size: 16px; color: var(--primary); }
+.month-card__metric { display: flex; align-items: baseline; gap: 4px; margin: 2px 0; }
+.month-card__num { font: 700 48px/52px var(--font-display); letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+.month-card__unit { color: var(--primary); font: 700 18px/24px var(--font-display); }
+.compare {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px;
+  background: rgb(12 14 18 / 0.8);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+}
+.compare__prev { color: var(--on-surface-variant); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; white-space: nowrap; }
+.compare__arrow { color: var(--outline-variant); }
+.compare__chip {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font: 700 10px/12px var(--font-display);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  background: rgb(var(--primary-container-rgb) / 0.2);
+  border: 1px solid rgb(var(--primary-container-rgb) / 0.4);
+  color: var(--primary-fixed);
+}
+.compare[data-tone='down'] .compare__chip { background: rgb(var(--redline-rgb) / 0.15); border-color: rgb(var(--redline-rgb) / 0.45); color: var(--tertiary-container); }
+.compare[data-tone='none'] .compare__chip,
+.compare[data-tone='same'] .compare__chip { background: var(--surface-container-high); border-color: var(--outline-variant); color: var(--on-surface-variant); }
+.month-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-top: 4px;
+  border-top: 1px solid rgb(var(--outline-variant-rgb) / 0.3);
+}
+.month-card__headline { flex: 1; min-width: 0; font: 600 13px/18px var(--font-body); }
+.month-card__headline .nowrap { white-space: nowrap; } /* "이기는 중 🔥"이 떨어지지 않게 */
+.month-card__link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: rgb(115 255 123 / 0.8);
+  font: 700 10px/12px var(--font-display);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.month-card__link:hover { text-decoration: underline; }
+.month-card__link .icon { font-size: 14px; }
+
+/* 연속 배너 */
+.home-summary { display: flex; flex-direction: column; gap: var(--space-sm); }
+.streak-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 12px var(--space-md);
+  background: var(--surface-container);
+  border: 1px solid rgb(115 255 123 / 0.5);
+}
+.streak-banner[data-level='cold'] { border-color: var(--outline-variant); }
+.streak-banner__main { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.streak-banner__icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: rgb(var(--primary-container-rgb) / 0.2);
+  color: var(--primary);
+}
+.streak-banner[data-level='hot'] .streak-banner__icon { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 0 0 rgb(var(--primary-container-rgb) / 0.4); } 50% { box-shadow: 0 0 0 5px rgb(var(--primary-container-rgb) / 0.15); } }
+.streak-banner__icon .icon { font-size: 20px; }
+.streak-banner__text { min-width: 0; }
+.streak-banner__title { font: 700 14px/18px var(--font-display); letter-spacing: 0.02em; }
+.streak-banner__sub { color: var(--primary); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; }
+.streak-banner__fire { color: var(--primary); }
+.streak-banner[data-level='cold'] .streak-banner__fire { color: var(--outline-variant); }
+
+/* 이번 달 요약 3칸: 좁은 폭에서도 잘리거나 겹치지 않게 글자 크기를 줄이고 단어 단위로 줄바꿈 */
+.stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); }
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 12px clamp(4px, 2vw, 12px);
+  text-align: center;
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+}
+.stat--accent { background: var(--surface-container-high); border-color: rgb(115 255 123 / 0.4); }
+.stat__label { color: var(--on-surface-variant); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; }
+.stat__label--accent { color: var(--primary); }
+.stat__value { margin-top: 2px; max-width: 100%; font: 700 clamp(15px, 4.6vw, 18px)/1.3 var(--font-display); }
+.stat__value--accent { color: var(--primary); }
+.stat__sub { margin-top: 4px; color: rgb(115 255 123 / 0.7); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; }
+.stat__sub--mint { color: var(--secondary-fixed-dim); }
+.stat__sub--plain { color: var(--on-surface-variant); }
+.stat__sub:empty { display: none; }
+.nobreak { white-space: nowrap; }
+
+/* 이번 주 루틴 흐름 */
+.week-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-md);
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+  border-radius: var(--radius-lg);
+}
+.week-card__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
+.week-card__title { display: flex; align-items: center; gap: 4px; font: 700 12px/16px var(--font-display); letter-spacing: 0.04em; }
+.week-card__title .icon { font-size: 16px; color: var(--primary); }
+.week-card__range { color: var(--on-surface-variant); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; white-space: nowrap; }
+.week-strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 4px 0 0; list-style: none; }
+.week-day { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.week-day__name, .week-day__label { color: var(--on-surface-variant); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; white-space: nowrap; }
+.week-day__dot {
+  width: 100%;
+  max-width: 2.5rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-high);
+  color: var(--on-surface-variant);
+  font: 600 12px/16px var(--font-display);
+  letter-spacing: 0.04em;
+}
+.week-day__dot .icon { font-size: 18px; }
+.week-day--future, .week-day--before { opacity: 0.4; }
+.week-day--done .week-day__dot,
+.week-day--today-done .week-day__dot { background: var(--primary-container); color: var(--on-primary-container); font-weight: 700; }
+.week-day--done .week-day__label { color: var(--primary); }
+.week-day--today .week-day__name, .week-day--today-done .week-day__name { color: var(--primary); }
+.week-day--today-done .week-day__dot { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px #fff, 0 0 12px rgb(var(--primary-container-rgb) / 0.6); }
+.week-day--today .week-day__dot { color: var(--on-surface); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--primary-container); }
+.week-day--today .week-day__label,
+.week-day--today-done .week-day__label { padding: 0 4px; border-radius: 0.25rem; background: rgb(var(--primary-container-rgb) / 0.4); color: #fff; }
+
+/* 오늘 점수 */
+.today-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 1.25rem;
+  background: var(--surface-container);
+  border: 1px solid rgb(var(--outline-variant-rgb) / 0.4);
+  border-radius: var(--radius-lg);
+}
+.today-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgb(var(--outline-variant-rgb) / 0.3);
+}
+.today-card__title { font: 700 18px/24px var(--font-display); }
+.today-card__desc { color: var(--on-surface-variant); font: 400 13px/18px var(--font-body); }
+.today-card__total { flex-shrink: 0; text-align: right; white-space: nowrap; } /* "/ 23점"이 줄바꿈되지 않게 */
+.today-card__num { color: var(--primary); font: 700 22px/28px var(--font-display); letter-spacing: -0.01em; }
+.today-card__max { color: var(--on-surface-variant); font: 400 15px/22px var(--font-body); }
+.meter { display: flex; flex-direction: column; gap: 6px; }
+.meter__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); font: 700 10px/12px var(--font-display); letter-spacing: 0.06em; }
+.meter__name { display: flex; align-items: center; gap: 4px; color: var(--on-surface); white-space: nowrap; }
+.meter__icon { font-size: 14px; color: var(--primary); }
+.meter__value { color: var(--primary); text-align: right; white-space: nowrap; }
+.meter__value small { color: var(--on-surface-variant); font: inherit; font-weight: 400; }
+.meter__track { width: 100%; height: 10px; overflow: hidden; border-radius: var(--radius-full); background: var(--surface-container-highest); }
+.meter__fill { width: 0; height: 100%; border-radius: var(--radius-full); background: var(--primary-container); box-shadow: 0 0 8px rgb(var(--primary-container-rgb) / 0.5); transition: width 0.5s; }
+.meter--bonus .meter__icon, .meter--bonus .meter__value { color: var(--secondary-fixed-dim); }
+.meter--bonus .meter__fill { background: var(--secondary-fixed-dim); box-shadow: none; }
+.meter--photo .meter__icon, .meter--photo .meter__value { color: var(--secondary-fixed); }
+.meter--photo .meter__fill { background: var(--secondary-fixed); box-shadow: none; }
+
+/* 하단 고정 "운동 추가하기" */
+.home-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--tabbar-h);
+  z-index: 40;
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 0 var(--margin-mobile) 12px;
+  pointer-events: none;
+}
+.home-cta__btn { pointer-events: auto; color: var(--surface-container-lowest); font: 700 18px/24px var(--font-display); }
+.home-cta__btn .icon { font-size: 24px; }
